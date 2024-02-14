@@ -1,0 +1,35 @@
+//
+//  DebugView.swift
+//  PokePal
+//
+//  Created by William Vabrinskas on 2/14/24.
+//
+
+import SwiftUI
+
+@Observable
+public class DebugViewModel {
+  let inferenceImage: Image?
+  
+  init(inferenceImage: Image? = nil) {
+    self.inferenceImage = inferenceImage
+  }
+}
+
+struct DebugView: View {
+  
+  @Binding var viewModel: DebugViewModel
+  
+  var body: some View {
+    VStack {
+      Text("last image")
+      viewModel.inferenceImage?
+        .resizable()
+        .frame(width: 64 * 4.7, height: 64 * 4.7)
+    }
+  }
+}
+
+#Preview {
+  DebugView(viewModel: .constant(.init(inferenceImage: .init(.pokeball))))
+}

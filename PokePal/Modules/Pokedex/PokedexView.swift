@@ -1,5 +1,5 @@
 //
-//  
+//
 //  PokedexView.swift
 //  PokePal
 //
@@ -12,17 +12,31 @@ import SwiftUI
 import HuddleArch
 import AVFoundation
 
+@Observable
+final class PokedexViewModel {
+  var viewfinderImage: Image?
+  var ready: Bool
+  var pokemon: [PokemonResult]
+  
+  public init(viewfinderImage: Image? = nil,
+              ready: Bool = false,
+              pokemon: [PokemonResult] = []) {
+    self.viewfinderImage = viewfinderImage
+    self.ready = ready
+    self.pokemon = pokemon
+  }
+}
+
 public struct PokedexView: View {
   let router:  PokedexRouting
   var module: any PokedexSupporting
   var moduleHolder: ModuleHolding?
   
-  @State var viewfinderImage: Image?
-  @State var pokemon: [PokemonResult] = []
+  @State var viewModel: PokedexViewModel = .init()
 
   public var body: some View {
     ZStack {
-      ViewfinderView(image: viewfinderImage)
+      ViewfinderView(image: viewModel.viewfinderImage)
         .background(
           Image(.pokeball)
           .resizable())
@@ -32,7 +46,7 @@ public struct PokedexView: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
       VStack {
-        ForEach(pokemon) { p in
+        ForEach(viewModel.pokemon) { p in
           HStack {
             Text(p.pokemon.name())
               .foregroundColor(.white)
@@ -47,7 +61,7 @@ public struct PokedexView: View {
         Spacer()
         Button {
           Task {
-            pokemon = await module.whosThatPokemon()
+            viewModel.pokemon = await module.whosThatPokemon()
           }
         } label: {
           Text("capture")
@@ -56,6 +70,7 @@ public struct PokedexView: View {
             .bold()
             .padding()
         }
+        .disabled(viewModel.ready == false)
         .background(Color.clear)
         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10),
                                     style: .continuous))
@@ -64,8 +79,11 @@ public struct PokedexView: View {
       }
     }
     .fullscreen()
-    .onReceive(module.viewFinderImage.subscribe(on: DispatchQueue.main)) { image in
-      viewfinderImage = image
+    .onReceive(module.viewFinderImage.receive(on: DispatchQueue.main)) { image in
+      viewModel.viewfinderImage = image
+    }
+    .onReceive(module.ready.receive(on: DispatchQueue.main)) { ready in
+      viewModel.ready = ready
     }
   }
 }
