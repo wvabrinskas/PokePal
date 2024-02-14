@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "huddlearch",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:wvabrinskas/HuddleArch.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0cf8c0ec2d5359771988d689de8774c69284215d"
+      }
+    },
+    {
+      "identity" : "logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wvabrinskas/Logger.git",
+      "state" : {
+        "revision" : "72e4516de6c671d00588031098438a933ee0d370",
+        "version" : "1.0.7"
+      }
+    },
+    {
+      "identity" : "neuron",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:wvabrinskas/Neuron.git",
+      "state" : {
+        "revision" : "924e858c2e4fbe0ed6b6cd248e388e95fcbf55a2",
+        "version" : "2.0.14"
+      }
+    },
+    {
+      "identity" : "numswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wvabrinskas/NumSwift.git",
+      "state" : {
+        "revision" : "51bcb4dfa55a4e1d93c1f7f5f4504e1a0b08982c",
+        "version" : "2.0.10"
+      }
+    }
+  ],
+  "version" : 2
+}
