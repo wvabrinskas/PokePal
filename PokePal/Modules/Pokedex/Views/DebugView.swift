@@ -9,7 +9,7 @@ import SwiftUI
 
 @Observable
 public class DebugViewModel {
-  let inferenceImage: Image?
+  var inferenceImage: Image?
   
   init(inferenceImage: Image? = nil) {
     self.inferenceImage = inferenceImage
@@ -18,7 +18,7 @@ public class DebugViewModel {
 
 struct DebugView: View {
   
-  @Binding var viewModel: DebugViewModel
+  let viewModel: DebugViewModel
   
   var body: some View {
     VStack {
@@ -31,5 +31,5 @@ struct DebugView: View {
 }
 
 #Preview {
-  DebugView(viewModel: .constant(.init(inferenceImage: .init(.pokeball))))
+  DebugView(viewModel: .init(inferenceImage: .init(.pokeball)))
 }

@@ -35,8 +35,7 @@ public struct PokemonResult: Identifiable {
 }
 
 public protocol PokedexSupporting {
-  var ready: AnyPublisher<Bool, Never> { get }
-  var viewFinderImage: AnyPublisher<Image?, Never> { get }
+  var viewModel: PokedexViewModel { get }
   func whosThatPokemon() async -> [PokemonResult]
   func start() async
 }
@@ -54,19 +53,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     case all = "pokemon-classifier"
   }
   
-  public var viewFinderImage: AnyPublisher<Image?, Never> {
-    $viewFinderImageSubject.eraseToAnyPublisher()
-  }
-  
-  public var ready: AnyPublisher<Bool, Never> {
-    $readySubject.eraseToAnyPublisher()
-  }
-  
-  @Published
-  private var viewFinderImageSubject: Image?
-  
-  @Published
-  private var readySubject: Bool = false
+  public var viewModel: PokedexViewModel = .init()
   
   private var imageToPredict: CIImage?
   
@@ -84,7 +71,9 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     Task.detached {
       self.sequential = Sequential.import(modelUrl)
       self.sequential?.compile()
-      self.readySubject = true
+      Task { @MainActor in
+        self.viewModel.ready = true
+      }
     }
   }
   
@@ -114,7 +103,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
         
         imageToPredict = imageToPredict.applyingFilter("CIColorControls",
                                                        parameters: [
-                                                        "inputContrast" : 2.0
+                                                        "inputContrast" : 1.5
                                                        ])
         
         imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
@@ -142,6 +131,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
           }
         }
         
+        viewModel.inferenceImage = Image(uiImage: imageToUse)
         continuation.resume(returning: await getPrdiction(image: imageToUse))
       }
     }
@@ -184,7 +174,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     for await image in imageStream {
       Task { @MainActor in
         guard let image else { return }
-        viewFinderImageSubject = image
+        viewModel.viewfinderImage = image
       }
     }
   }
@@ -201,21 +191,5 @@ fileprivate extension CIImage {
     let ciContext = CIContext()
     guard let cgImage = ciContext.createCGImage(self, from: self.extent) else { return nil }
     return Image(decorative: cgImage, scale: 1, orientation: .up)
-  }
-}
-
-fileprivate extension Image.Orientation {
-  
-  init(_ cgImageOrientation: CGImagePropertyOrientation) {
-    switch cgImageOrientation {
-    case .up: self = .up
-    case .upMirrored: self = .upMirrored
-    case .down: self = .down
-    case .downMirrored: self = .downMirrored
-    case .left: self = .left
-    case .leftMirrored: self = .leftMirrored
-    case .right: self = .right
-    case .rightMirrored: self = .rightMirrored
-    }
   }
 }

@@ -36,7 +36,9 @@ public class PokedexRouter: PokedexRouting, Logger {
   }
   
   public func rootView() -> any View {
-    PokedexView(router: self, module: component.module, moduleHolder: component.moduleHolder)
+    PokedexView(router: self, module: component.module,
+                moduleHolder: component.moduleHolder,
+                viewModel: component.module.viewModel)
   }
   
   public func routeToCameraView() -> any View {

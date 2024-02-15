@@ -13,17 +13,23 @@ import HuddleArch
 import AVFoundation
 
 @Observable
-final class PokedexViewModel {
+public final class PokedexViewModel {
   var viewfinderImage: Image?
+  var inferenceImage: Image?
   var ready: Bool
   var pokemon: [PokemonResult]
+  var showDebugMenu: Bool
   
   public init(viewfinderImage: Image? = nil,
+              inferenceImage: Image? = nil,
               ready: Bool = false,
-              pokemon: [PokemonResult] = []) {
+              pokemon: [PokemonResult] = [],
+              showDebugMenu: Bool = false) {
     self.viewfinderImage = viewfinderImage
     self.ready = ready
     self.pokemon = pokemon
+    self.showDebugMenu = showDebugMenu
+    self.inferenceImage = inferenceImage
   }
 }
 
@@ -32,7 +38,7 @@ public struct PokedexView: View {
   var module: any PokedexSupporting
   var moduleHolder: ModuleHolding?
   
-  @State var viewModel: PokedexViewModel = .init()
+  @State var viewModel: PokedexViewModel
 
   public var body: some View {
     ZStack {
@@ -59,31 +65,45 @@ public struct PokedexView: View {
         .padding()
         .background(Color.black)
         Spacer()
-        Button {
-          Task {
-            viewModel.pokemon = await module.whosThatPokemon()
+        HStack {
+          Button {
+            Task {
+              viewModel.pokemon = await module.whosThatPokemon()
+            }
+          } label: {
+            Text("capture")
+              .foregroundColor(.black)
+              .font(.system(size: 22))
+              .bold()
+              .padding()
           }
-        } label: {
-          Text("capture")
-            .foregroundColor(.black)
-            .font(.system(size: 22))
-            .bold()
-            .padding()
+          .disabled(viewModel.ready == false)
+          .background(Color.white)
+          .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10),
+                                      style: .continuous))
+          
+          Button {
+            viewModel.showDebugMenu = true
+          } label: {
+            Text("debug")
+              .foregroundColor(.white)
+              .font(.system(size: 22))
+              .bold()
+              .padding()
+          }
+          .disabled(viewModel.ready == false)
+          .background(Color.blue)
+          .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10),
+                                      style: .continuous))
         }
-        .disabled(viewModel.ready == false)
-        .background(Color.clear)
-        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10),
-                                    style: .continuous))
+
         .padding()
-        .offset(CGSize(width: -26.0, height: -98.0))
+//        .offset(CGSize(width: -26.0, height: -98.0))
       }
     }
     .fullscreen()
-    .onReceive(module.viewFinderImage.receive(on: DispatchQueue.main)) { image in
-      viewModel.viewfinderImage = image
-    }
-    .onReceive(module.ready.receive(on: DispatchQueue.main)) { ready in
-      viewModel.ready = ready
+    .sheet(isPresented: $viewModel.showDebugMenu) {
+      DebugView(viewModel: .init(inferenceImage: viewModel.inferenceImage))
     }
   }
 }
