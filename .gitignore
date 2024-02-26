@@ -5,4 +5,3 @@ Pods/Pods.xcodeproj/xcuserdata/*
 *.xcworkspace/xcuserdata/*
 *.xcodeproj/project.xcworkspace/xcuserdata/
 .DS_Store
-*/Resources/*.smodel

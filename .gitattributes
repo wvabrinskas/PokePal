@@ -1,0 +1,2 @@
+PokePal/Resources/*.smodel filter=lfs diff=lfs merge=lfs -text
+*.smodel filter=lfs diff=lfs merge=lfs -text
