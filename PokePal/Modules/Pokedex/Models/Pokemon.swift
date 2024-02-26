@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Pokemon: Int {
+public enum Pokemon: Int, CaseIterable {
   case bulbasaur = 1
   case ivysaur = 2
   case venusaur = 3
@@ -1306,6 +1306,12 @@ public enum Pokemon: Int {
     }
     
     return from
+  }
+  
+  func url() -> URL? {
+    let baseUrl = "https://www.serebii.net/pokemon/"
+    let name = name().split(separator: " ")[0].lowercased()
+    return URL(string: baseUrl + name)
   }
   
   func name() -> String {

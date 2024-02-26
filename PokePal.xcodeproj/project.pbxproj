@@ -24,6 +24,9 @@
 		912BDDAA2B7B051800F873EE /* UIImage+Tensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912BDDA92B7B051800F873EE /* UIImage+Tensor.swift */; };
 		912BDDAC2B7B0A5A00F873EE /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912BDDAB2B7B0A5A00F873EE /* Camera.swift */; };
 		912BDDAF2B7B0BDB00F873EE /* ViewFinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912BDDAE2B7B0BDB00F873EE /* ViewFinderView.swift */; };
+		913FFD162B7DABDE0028D4D7 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD152B7DABDE0028D4D7 /* ResultsView.swift */; };
+		913FFD182B7DB56E0028D4D7 /* WebResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD172B7DB56E0028D4D7 /* WebResultView.swift */; };
+		913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */; };
 		917FD36D2B7D79200096B4AA /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917FD36C2B7D79200096B4AA /* DebugView.swift */; };
 		91ABCB392B78203D00FA7C0C /* PokePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABCB382B78203D00FA7C0C /* PokePalApp.swift */; };
 		91ABCB3B2B78203D00FA7C0C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABCB3A2B78203D00FA7C0C /* ContentView.swift */; };
@@ -35,7 +38,6 @@
 		91C30A272B7D73500071D7F8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A232B7D73500071D7F8 /* CameraView.swift */; };
 		91C30A282B7D73500071D7F8 /* CameraRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A242B7D73500071D7F8 /* CameraRouter.swift */; };
 		91C30A2A2B7D73580071D7F8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A292B7D73580071D7F8 /* CameraViewController.swift */; };
-		91C30A2C2B7D73960071D7F8 /* 151-pokemon-classifier.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 91C30A2B2B7D73960071D7F8 /* 151-pokemon-classifier.smodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,9 @@
 		912BDDA92B7B051800F873EE /* UIImage+Tensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Tensor.swift"; sourceTree = "<group>"; };
 		912BDDAB2B7B0A5A00F873EE /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		912BDDAE2B7B0BDB00F873EE /* ViewFinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFinderView.swift; sourceTree = "<group>"; };
+		913FFD152B7DABDE0028D4D7 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		913FFD172B7DB56E0028D4D7 /* WebResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebResultView.swift; sourceTree = "<group>"; };
+		913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "151-pokemon-classifier.smodel"; sourceTree = "<group>"; };
 		917FD36C2B7D79200096B4AA /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		91ABCB352B78203D00FA7C0C /* PokePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91ABCB382B78203D00FA7C0C /* PokePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokePalApp.swift; sourceTree = "<group>"; };
@@ -67,7 +72,6 @@
 		91C30A232B7D73500071D7F8 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		91C30A242B7D73500071D7F8 /* CameraRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraRouter.swift; sourceTree = "<group>"; };
 		91C30A292B7D73580071D7F8 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		91C30A2B2B7D73960071D7F8 /* 151-pokemon-classifier.smodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "151-pokemon-classifier.smodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 			children = (
 				912BDDAE2B7B0BDB00F873EE /* ViewFinderView.swift */,
 				917FD36C2B7D79200096B4AA /* DebugView.swift */,
+				913FFD152B7DABDE0028D4D7 /* ResultsView.swift */,
+				913FFD172B7DB56E0028D4D7 /* WebResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,7 +194,7 @@
 		91ABCB492B791A7400FA7C0C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				91C30A2B2B7D73960071D7F8 /* 151-pokemon-classifier.smodel */,
+				913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */,
 				91289C352B7BF34E00BBB16F /* pokemon-classifier.smodel */,
 			);
 			path = Resources;
@@ -282,7 +288,7 @@
 			files = (
 				91ABCB402B78203F00FA7C0C /* Preview Assets.xcassets in Resources */,
 				91289C362B7BF34E00BBB16F /* pokemon-classifier.smodel in Resources */,
-				91C30A2C2B7D73960071D7F8 /* 151-pokemon-classifier.smodel in Resources */,
+				913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */,
 				91ABCB3D2B78203F00FA7C0C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				912BDDAC2B7B0A5A00F873EE /* Camera.swift in Sources */,
+				913FFD162B7DABDE0028D4D7 /* ResultsView.swift in Sources */,
 				910BCFD12B7AFA490057550D /* PokedexModule.swift in Sources */,
 				91C30A282B7D73500071D7F8 /* CameraRouter.swift in Sources */,
 				912BDDAF2B7B0BDB00F873EE /* ViewFinderView.swift in Sources */,
@@ -304,6 +311,7 @@
 				910BCFC22B7ADD580057550D /* RootRouter.swift in Sources */,
 				910BCFC92B7AF65D0057550D /* Environment.swift in Sources */,
 				91C30A262B7D73500071D7F8 /* CameraModule.swift in Sources */,
+				913FFD182B7DB56E0028D4D7 /* WebResultView.swift in Sources */,
 				910BCFC12B7ADD580057550D /* RootModule.swift in Sources */,
 				91C30A2A2B7D73580071D7F8 /* CameraViewController.swift in Sources */,
 				910BCFD42B7AFA490057550D /* PokedexView.swift in Sources */,

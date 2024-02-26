@@ -36,7 +36,7 @@ public struct PokemonResult: Identifiable {
 
 public protocol PokedexSupporting {
   var viewModel: PokedexViewModel { get }
-  func whosThatPokemon() async -> [PokemonResult]
+  func whosThatPokemon() async
   func start() async
 }
 
@@ -53,7 +53,8 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     case all = "pokemon-classifier"
   }
   
-  public var viewModel: PokedexViewModel = .init()
+  public var viewModel: PokedexViewModel = .init(imageProperties: ImageProperties(sharpness: 0.8,
+                                                                                  contrast: 1.5))
   
   private var imageToPredict: CIImage?
   
@@ -92,9 +93,9 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     await cameraModule.start()
   }
   
-  public func whosThatPokemon() async -> [PokemonResult] {
+  public func whosThatPokemon() async {
     // move off main thread
-    await withUnsafeContinuation { [self] continuation in
+    let result: [PokemonResult] = await withUnsafeContinuation { [self] continuation in
       Task { @MainActor in
         guard var imageToPredict else {
           continuation.resume(returning: [])
@@ -103,12 +104,12 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
         
         imageToPredict = imageToPredict.applyingFilter("CIColorControls",
                                                        parameters: [
-                                                        "inputContrast" : 1.5
+                                                        "inputContrast" : viewModel.imageProperties.contrast
                                                        ])
         
         imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
                                                        parameters: [
-                                                        "inputSharpness" : 0.8
+                                                        "inputSharpness" : viewModel.imageProperties.sharpness
                                                        ])
         
         guard let imageRezised = imageToPredict.uiImage?.resizeImage(targetSize: CGSize(width: 64, height: 64)) else {
@@ -135,6 +136,9 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
         continuation.resume(returning: await getPrdiction(image: imageToUse))
       }
     }
+    
+    viewModel.pokemon = result
+    viewModel.showResultsMenu = true
   }
   
   // MARK:  private
