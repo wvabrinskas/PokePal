@@ -50,7 +50,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   
   enum Model: String {
     case original = "151-pokemon-classifier"
-    case all = "pokemon-classifier"
+    case gen1to3 = "gen1-3-pokemon-classifier"
   }
   
   public var viewModel: PokedexViewModel = .init(imageProperties: ImageProperties(sharpness: 0.8,
@@ -60,7 +60,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   
   private var sequential: Sequential?
   
-  private let model = Model.original
+  private let model = Model.gen1to3
   
   public required init(holder: ModuleHolding?, context: Context, component: Component) {
     guard let modelUrl = Bundle.main.url(forResource: model.rawValue, withExtension: "smodel") else {
