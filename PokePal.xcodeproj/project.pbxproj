@@ -20,6 +20,7 @@
 		910BCFD32B7AFA490057550D /* PokedexBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910BCFCF2B7AFA490057550D /* PokedexBuilder.swift */; };
 		910BCFD42B7AFA490057550D /* PokedexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910BCFD02B7AFA490057550D /* PokedexView.swift */; };
 		910BCFD72B7AFAC10057550D /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910BCFD62B7AFAC10057550D /* Pokemon.swift */; };
+		912644C12B92547C00A8B073 /* ImagesToConvert.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 912644C02B92547C00A8B073 /* ImagesToConvert.bundle */; };
 		912BDDAA2B7B051800F873EE /* UIImage+Tensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912BDDA92B7B051800F873EE /* UIImage+Tensor.swift */; };
 		912BDDAC2B7B0A5A00F873EE /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912BDDAB2B7B0A5A00F873EE /* Camera.swift */; };
 		912BDDAF2B7B0BDB00F873EE /* ViewFinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912BDDAE2B7B0BDB00F873EE /* ViewFinderView.swift */; };
@@ -53,6 +54,7 @@
 		910BCFCF2B7AFA490057550D /* PokedexBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexBuilder.swift; sourceTree = "<group>"; };
 		910BCFD02B7AFA490057550D /* PokedexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexView.swift; sourceTree = "<group>"; };
 		910BCFD62B7AFAC10057550D /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		912644C02B92547C00A8B073 /* ImagesToConvert.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ImagesToConvert.bundle; sourceTree = "<group>"; };
 		91289C342B7BDF3A00BBB16F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		912BDDA92B7B051800F873EE /* UIImage+Tensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Tensor.swift"; sourceTree = "<group>"; };
 		912BDDAB2B7B0A5A00F873EE /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		91ABCB492B791A7400FA7C0C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				912644C02B92547C00A8B073 /* ImagesToConvert.bundle */,
 				912C5CDE2B9119D50085431C /* gen1-3-pokemon-classifier.smodel */,
 				913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */,
 			);
@@ -289,6 +292,7 @@
 				91ABCB402B78203F00FA7C0C /* Preview Assets.xcassets in Resources */,
 				913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */,
 				912C5CDF2B9119D50085431C /* gen1-3-pokemon-classifier.smodel in Resources */,
+				912644C12B92547C00A8B073 /* ImagesToConvert.bundle in Resources */,
 				91ABCB3D2B78203F00FA7C0C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
