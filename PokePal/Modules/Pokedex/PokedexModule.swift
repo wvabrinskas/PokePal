@@ -81,7 +81,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   public override func onActive() {
     super.onActive()
     
-    Task {
+    Task { @MainActor in
       await start()
       await handleCameraPreviews()
     }
@@ -178,7 +178,9 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     for await image in imageStream {
       Task { @MainActor in
         guard let image else { return }
-        viewModel.viewfinderImage = image
+        if viewModel.ready {
+          viewModel.viewfinderImage = image
+        }
       }
     }
   }
