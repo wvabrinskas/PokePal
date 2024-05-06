@@ -27,12 +27,14 @@
 		913FFD162B7DABDE0028D4D7 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD152B7DABDE0028D4D7 /* ResultsView.swift */; };
 		913FFD182B7DB56E0028D4D7 /* WebResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD172B7DB56E0028D4D7 /* WebResultView.swift */; };
 		913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */; };
+		914730902BE85A7D004B80E2 /* pokemon-all-classifier_minified.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 9147308F2BE85A7D004B80E2 /* pokemon-all-classifier_minified.smodel */; };
+		917AB7E42BE8618800CC6344 /* HuddleMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 917AB7E32BE8618800CC6344 /* HuddleMacros */; };
 		917FD36D2B7D79200096B4AA /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917FD36C2B7D79200096B4AA /* DebugView.swift */; };
+		91A11BFD2BE858AE006BC25F /* Neuron in Frameworks */ = {isa = PBXBuildFile; productRef = 91A11BFC2BE858AE006BC25F /* Neuron */; };
 		91ABCB392B78203D00FA7C0C /* PokePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABCB382B78203D00FA7C0C /* PokePalApp.swift */; };
 		91ABCB3B2B78203D00FA7C0C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ABCB3A2B78203D00FA7C0C /* ContentView.swift */; };
 		91ABCB3D2B78203F00FA7C0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91ABCB3C2B78203F00FA7C0C /* Assets.xcassets */; };
 		91ABCB402B78203F00FA7C0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91ABCB3F2B78203F00FA7C0C /* Preview Assets.xcassets */; };
-		91ABCB482B78205D00FA7C0C /* Neuron in Frameworks */ = {isa = PBXBuildFile; productRef = 91ABCB472B78205D00FA7C0C /* Neuron */; };
 		91C30A252B7D73500071D7F8 /* CameraBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A212B7D73500071D7F8 /* CameraBuilder.swift */; };
 		91C30A262B7D73500071D7F8 /* CameraModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A222B7D73500071D7F8 /* CameraModule.swift */; };
 		91C30A272B7D73500071D7F8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A232B7D73500071D7F8 /* CameraView.swift */; };
@@ -61,6 +63,7 @@
 		913FFD152B7DABDE0028D4D7 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		913FFD172B7DB56E0028D4D7 /* WebResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebResultView.swift; sourceTree = "<group>"; };
 		913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "151-pokemon-classifier.smodel"; sourceTree = "<group>"; };
+		9147308F2BE85A7D004B80E2 /* pokemon-all-classifier_minified.smodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pokemon-all-classifier_minified.smodel"; sourceTree = "<group>"; };
 		917FD36C2B7D79200096B4AA /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		91ABCB352B78203D00FA7C0C /* PokePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91ABCB382B78203D00FA7C0C /* PokePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokePalApp.swift; sourceTree = "<group>"; };
@@ -79,8 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				917AB7E42BE8618800CC6344 /* HuddleMacros in Frameworks */,
 				910BCFB82B7ADC490057550D /* HuddleArch in Frameworks */,
-				91ABCB482B78205D00FA7C0C /* Neuron in Frameworks */,
+				91A11BFD2BE858AE006BC25F /* Neuron in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,11 +154,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		917AB7E22BE8618800CC6344 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		91ABCB2C2B78203D00FA7C0C = {
 			isa = PBXGroup;
 			children = (
 				91ABCB372B78203D00FA7C0C /* PokePal */,
 				91ABCB362B78203D00FA7C0C /* Products */,
+				917AB7E22BE8618800CC6344 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,6 +206,7 @@
 		91ABCB492B791A7400FA7C0C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9147308F2BE85A7D004B80E2 /* pokemon-all-classifier_minified.smodel */,
 				912C5CDE2B9119D50085431C /* gen1-3-pokemon-classifier.smodel */,
 				913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */,
 			);
@@ -237,8 +250,9 @@
 			);
 			name = PokePal;
 			packageProductDependencies = (
-				91ABCB472B78205D00FA7C0C /* Neuron */,
 				910BCFB72B7ADC490057550D /* HuddleArch */,
+				91A11BFC2BE858AE006BC25F /* Neuron */,
+				917AB7E32BE8618800CC6344 /* HuddleMacros */,
 			);
 			productName = PokePal;
 			productReference = 91ABCB352B78203D00FA7C0C /* PokePal.app */;
@@ -269,8 +283,8 @@
 			);
 			mainGroup = 91ABCB2C2B78203D00FA7C0C;
 			packageReferences = (
-				91ABCB462B78205D00FA7C0C /* XCRemoteSwiftPackageReference "Neuron" */,
 				910BCFB62B7ADC490057550D /* XCRemoteSwiftPackageReference "HuddleArch" */,
+				91A11BFB2BE858AE006BC25F /* XCRemoteSwiftPackageReference "Neuron" */,
 			);
 			productRefGroup = 91ABCB362B78203D00FA7C0C /* Products */;
 			projectDirPath = "";
@@ -286,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				914730902BE85A7D004B80E2 /* pokemon-all-classifier_minified.smodel in Resources */,
 				91ABCB402B78203F00FA7C0C /* Preview Assets.xcassets in Resources */,
 				913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */,
 				912C5CDF2B9119D50085431C /* gen1-3-pokemon-classifier.smodel in Resources */,
@@ -544,16 +559,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:wvabrinskas/HuddleArch.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
 			};
 		};
-		91ABCB462B78205D00FA7C0C /* XCRemoteSwiftPackageReference "Neuron" */ = {
+		91A11BFB2BE858AE006BC25F /* XCRemoteSwiftPackageReference "Neuron" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:wvabrinskas/Neuron.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.14;
+				branch = "rnn-rework";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -564,9 +579,14 @@
 			package = 910BCFB62B7ADC490057550D /* XCRemoteSwiftPackageReference "HuddleArch" */;
 			productName = HuddleArch;
 		};
-		91ABCB472B78205D00FA7C0C /* Neuron */ = {
+		917AB7E32BE8618800CC6344 /* HuddleMacros */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 91ABCB462B78205D00FA7C0C /* XCRemoteSwiftPackageReference "Neuron" */;
+			package = 910BCFB62B7ADC490057550D /* XCRemoteSwiftPackageReference "HuddleArch" */;
+			productName = HuddleMacros;
+		};
+		91A11BFC2BE858AE006BC25F /* Neuron */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91A11BFB2BE858AE006BC25F /* XCRemoteSwiftPackageReference "Neuron" */;
 			productName = Neuron;
 		};
 /* End XCSwiftPackageProductDependency section */

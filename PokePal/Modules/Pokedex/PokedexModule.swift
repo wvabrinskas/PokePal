@@ -12,6 +12,7 @@ import Foundation
 import SwiftUI
 import UIKit
 import Neuron
+import HuddleMacros
 import HuddleArch
 import AVFoundation
 import VisionKit
@@ -20,12 +21,8 @@ public protocol PokedexModuleComponent: Component {
   // add dependencies here
 }
 
+@ComponentImpl
 public class PokedexModuleComponentImpl: Component, PokedexModuleComponent {
-  // implement dependencies here
-  
-  public override init(parent: Component?) {
-    super.init(parent: parent)
-  }
 }
 
 public struct PokemonResult: Identifiable {
@@ -51,6 +48,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   enum Model: String {
     case original = "151-pokemon-classifier"
     case gen1to3 = "gen1-3-pokemon-classifier"
+    case all = "pokemon-all-classifier_minified"
   }
   
   public var viewModel: PokedexViewModel = .init(imageProperties: ImageProperties(sharpness: 0.8,
@@ -74,7 +72,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
       self.sequential?.compile()
       Task { @MainActor in
         self.viewModel.ready = true
-      }
+      } 
     }
   }
   

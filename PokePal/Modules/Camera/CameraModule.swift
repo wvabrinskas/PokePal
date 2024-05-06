@@ -9,6 +9,7 @@
 
 import Foundation
 import HuddleArch
+import HuddleMacros
 import AVFoundation
 import Logger
 import CoreImage
@@ -18,12 +19,8 @@ public protocol CameraModuleComponent: Component {
   // add dependencies here
 }
 
+@ComponentImpl
 public class CameraModuleComponentImpl: Component, CameraModuleComponent {
-  // implement dependencies here
-
-  public override init(parent: Component?) {
-    super.init(parent: parent)
-  }
 }
 
 public protocol CameraSupporting {

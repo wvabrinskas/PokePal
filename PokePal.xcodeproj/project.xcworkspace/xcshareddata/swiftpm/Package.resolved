@@ -1,12 +1,13 @@
 {
+  "originHash" : "2a1800b701bed3b0bc598456b1b6533c5313af6ff64656fe1db0ca232cbbb527",
   "pins" : [
     {
       "identity" : "huddlearch",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:wvabrinskas/HuddleArch.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "0cf8c0ec2d5359771988d689de8774c69284215d"
+        "revision" : "b804c5e8dbc8583812a7b2f0b83cd4b0a5528493",
+        "version" : "1.0.6"
       }
     },
     {
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:wvabrinskas/Neuron.git",
       "state" : {
-        "revision" : "924e858c2e4fbe0ed6b6cd248e388e95fcbf55a2",
-        "version" : "2.0.14"
+        "branch" : "rnn-rework",
+        "revision" : "0e46e23c15669667c63494318ab2ec47ef9c070e"
       }
     },
     {
@@ -32,10 +33,19 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wvabrinskas/NumSwift.git",
       "state" : {
-        "revision" : "51bcb4dfa55a4e1d93c1f7f5f4504e1a0b08982c",
-        "version" : "2.0.10"
+        "revision" : "40d0794ba10458577ec5cc572f6642c6cce393c5",
+        "version" : "2.0.11"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
+        "version" : "509.1.1"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
