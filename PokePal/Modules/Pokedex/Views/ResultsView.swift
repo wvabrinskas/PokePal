@@ -56,8 +56,8 @@ struct ResultsView: View {
         ForEach(0..<viewModel.results.count, id: \.self) { index in
           let pokemon = viewModel.results[index]
           HStack {
-            Text(pokemon.pokemon.name())
-              .font(.system(size: index == 0 ? 30 : 22))
+            Text(pokemon.pokemon.name().replacingOccurrences(of: "_", with: " "))
+              .font(.system(size: index == 0 ? 25 : 22))
               .fontDesign(.rounded)
               .fontWeight(index == 0 ? .heavy : .medium)
               .bold(index == 0)

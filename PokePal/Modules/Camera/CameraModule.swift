@@ -1,5 +1,5 @@
 //
-//  
+//
 //  CameraModule.swift
 //  PokePal
 //
@@ -25,14 +25,18 @@ public class CameraModuleComponentImpl: Component, CameraModuleComponent {
 
 public protocol CameraSupporting {
   var previewStream: AsyncStream<CIImage> { get }
-  var cameraViewController: CameraViewController { get }
   func start() async
   func stop()
+  func pinchToZoom(_ scale: CGFloat)
 }
 
-public final class CameraModule: ModuleObject<RootModuleHolderContext, CameraModuleComponent,  CameraRouter>, CameraSupporting, Logger {
+public final class CameraModule: ModuleObject<RootModuleHolderContext,
+                                  CameraModuleComponent,
+                                  CameraRouter>,
+                                 CameraSupporting,
+                                 Logger {
   public var logLevel: LogLevel = .medium
-  public let cameraViewController: CameraViewController = CameraViewController()
+  
   public lazy var previewStream: AsyncStream<CIImage> = {
     AsyncStream { continuation in
       addToPreviewStream = { ciImage in
@@ -111,8 +115,13 @@ public final class CameraModule: ModuleObject<RootModuleHolderContext, CameraMod
   }
   
   private var addToPreviewStream: ((CIImage) -> Void)?
+  private var uiPinchGesture: UIPinchGestureRecognizer?
   
   private var isPreviewPaused = false
+  
+  deinit {
+    stop()
+  }
   
   public required init(holder: ModuleHolding?, context: Context, component: Component) {
     super.init(holder: holder, context: context, component: component)
@@ -131,9 +140,6 @@ public final class CameraModule: ModuleObject<RootModuleHolderContext, CameraMod
       if !captureSession.isRunning {
         sessionQueue.async { [self] in
           self.captureSession.startRunning()
-          Task { @MainActor in
-            self.addLayerToViewController()
-          }
         }
       }
       return
@@ -143,9 +149,6 @@ public final class CameraModule: ModuleObject<RootModuleHolderContext, CameraMod
       self.configureCaptureSession { success in
         guard success else { return }
         self.captureSession.startRunning()
-        Task { @MainActor in
-          self.addLayerToViewController()
-        }
       }
     }
   }
@@ -153,13 +156,32 @@ public final class CameraModule: ModuleObject<RootModuleHolderContext, CameraMod
   public func stop() {
     guard isCaptureSessionConfigured else { return }
     
+    uiPinchGesture = nil
+    
     if captureSession.isRunning {
       sessionQueue.async {
         self.captureSession.stopRunning()
       }
     }
+  }
+  
+  // MARK: CameraViewControllerListener
+  
+  public func pinchToZoom(_ scale: CGFloat) {
+    guard let captureDevice = captureDevice else { return }
     
-    cameraViewController.end()
+    do {
+      try captureDevice.lockForConfiguration()
+      let maxZoomFactor = captureDevice.activeFormat.videoMaxZoomFactor
+      let pinchVelocityDividerFactor: CGFloat = 5.0
+      var desiredZoomFactor = captureDevice.videoZoomFactor + atan2(scale, pinchVelocityDividerFactor)
+      
+      desiredZoomFactor = max(1.0, min(desiredZoomFactor, maxZoomFactor))
+      captureDevice.videoZoomFactor = desiredZoomFactor
+      captureDevice.unlockForConfiguration()
+    } catch {
+      log(type: .error, message: "Error setting zoom factor: \(error.localizedDescription)")
+    }
   }
   
   // MARK: Private
@@ -292,22 +314,6 @@ public final class CameraModule: ModuleObject<RootModuleHolderContext, CameraMod
     }
   }
 
-  @MainActor
-  private func addLayerToViewController() {
-    let layer = AVCaptureVideoPreviewLayer(session: captureSession)
-    let xStart = (CGFloat(layer.frame.size.width) / 2) - (CGFloat(64))
-    let yStart = (CGFloat(layer.frame.size.height) / 2) - (CGFloat(64))
-    
-    let rect = CGRect(x: xStart,
-                      y: yStart,
-                      width: CGFloat(64 * 4),
-                      height: CGFloat(64 * 4))
-    
-    layer.frame = rect
-    
-    cameraViewController.setPreviewLayer(layer: layer)
-  }
-  
   private func switchCaptureDevice() {
     if let captureDevice = captureDevice, let index = availableCaptureDevices.firstIndex(of: captureDevice) {
       let nextIndex = (index + 1) % availableCaptureDevices.count
@@ -316,6 +322,7 @@ public final class CameraModule: ModuleObject<RootModuleHolderContext, CameraMod
       self.captureDevice = AVCaptureDevice.default(for: .video)
     }
   }
+ 
   
 }
 
@@ -335,14 +342,14 @@ extension CameraModule: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     if let ref = context.createCGImage(ciImg, from: ciImg.extent) {
       
-      let xStart = (CGFloat(ciImg.extent.size.width) / 2) - (CGFloat(64))
-      let yStart = (CGFloat(ciImg.extent.size.height) / 2) - (CGFloat(64))
+      let xStart = (CGFloat(ciImg.extent.size.width) / 2) - (CGFloat(64 * 8))
+      let yStart = (CGFloat(ciImg.extent.size.height) / 2) - (CGFloat(64 * 8))
       
       var ref = ref
       let rect =  CGRect(x: xStart,
                          y: yStart,
-                         width: CGFloat(64 * 4),
-                         height: CGFloat(64 * 4))
+                         width: CGFloat(64 * 8),
+                         height: CGFloat(64 * 8))
       
       if let crop = ref.cropping(to: rect) {
         ref = crop
@@ -352,4 +359,5 @@ extension CameraModule: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
   }
 }
+
 

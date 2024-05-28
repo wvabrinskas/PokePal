@@ -38,6 +38,6 @@ public class CameraRouter: CameraRouting, Logger {
   }
   
   public func rootView() -> any View {
-    CameraView(router: self, module: component.module, moduleHolder: component.moduleHolder)
+    CameraView()
   }
 }

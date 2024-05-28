@@ -35,6 +35,7 @@ public protocol PokedexSupporting {
   var viewModel: PokedexViewModel { get }
   func whosThatPokemon() async
   func start() async
+  func pinchToZoom(_ scale: CGFloat)
 }
 
 @Observable
@@ -58,7 +59,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   
   private var sequential: Sequential?
   
-  private let model = Model.gen1to3
+  private let model = Model.all
   
   public required init(holder: ModuleHolding?, context: Context, component: Component) {
     guard let modelUrl = Bundle.main.url(forResource: model.rawValue, withExtension: "smodel") else {
@@ -67,12 +68,16 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     
     super.init(holder: holder, context: context, component: component)
 
+
     Task.detached {
-      self.sequential = Sequential.import(modelUrl)
-      self.sequential?.compile()
+      if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
+        self.sequential = Sequential.import(modelUrl)
+        self.sequential?.compile()
+      }
+
       Task { @MainActor in
         self.viewModel.ready = true
-      } 
+      }
     }
   }
   
@@ -100,15 +105,18 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
           return
         }
         
-        imageToPredict = imageToPredict.applyingFilter("CIColorControls",
-                                                       parameters: [
-                                                        "inputContrast" : viewModel.imageProperties.contrast
-                                                       ])
-        
-        imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
-                                                       parameters: [
-                                                        "inputSharpness" : viewModel.imageProperties.sharpness
-                                                       ])
+        if viewModel.imageProperties.preProcess {
+          imageToPredict = imageToPredict.applyingFilter("CIColorControls",
+                                                         parameters: [
+                                                          "inputContrast" : viewModel.imageProperties.contrast
+                                                         ])
+          
+          imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
+                                                         parameters: [
+                                                          "inputSharpness" : viewModel.imageProperties.sharpness
+                                                         ])
+          
+        }
         
         guard let imageRezised = imageToPredict.uiImage?.resizeImage(targetSize: CGSize(width: 64, height: 64)) else {
           continuation.resume(returning: [])
@@ -116,17 +124,19 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
         }
         
         var imageToUse = imageRezised
-        
-        let analyser = ImageAnalyzer()
-        let interaction = ImageAnalysisInteraction()
-        let configuration = ImageAnalyzer.Configuration([.text, .visualLookUp, .machineReadableCode])
-        let analysis = try? await analyser.analyze(imageToUse, configuration: configuration)
-        interaction.analysis = analysis
 
-        if let uiImage = try? await interaction.image(for: interaction.subjects) {
-          if let whiteImage = UIImage(color: .white, size: CGSize(width: 64, height: 64))?.resizeImage(targetSize: CGSize(width: 64, height: 64)) {
-            let mergedImage = whiteImage.mergeWith(topImage: uiImage)
-            imageToUse = mergedImage
+        if viewModel.imageProperties.preProcess {
+          let analyser = ImageAnalyzer()
+          let interaction = ImageAnalysisInteraction()
+          let configuration = ImageAnalyzer.Configuration([.text, .visualLookUp, .machineReadableCode])
+          let analysis = try? await analyser.analyze(imageToUse, configuration: configuration)
+          interaction.analysis = analysis
+          
+          if let uiImage = try? await interaction.image(for: interaction.subjects) {
+            if let whiteImage = UIImage(color: .white, size: CGSize(width: 64, height: 64))?.resizeImage(targetSize: CGSize(width: 64, height: 64)) {
+              let mergedImage = whiteImage.mergeWith(topImage: uiImage)
+              imageToUse = mergedImage
+            }
           }
         }
         
@@ -137,6 +147,11 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     
     viewModel.pokemon = result
     viewModel.showResultsMenu = true
+  }
+  
+  public func pinchToZoom(_ scale: CGFloat) {
+    guard let cameraModule: CameraSupporting = holder?.module() else { return }
+    cameraModule.pinchToZoom(scale)
   }
   
   // MARK:  private
@@ -167,6 +182,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   private func handleCameraPreviews() async {
     guard let cameraModule: CameraSupporting = holder?.module() else { return }
 
+    // TODO: Maybe migrate to CameraModule
     let imageStream = cameraModule.previewStream
       .map { image in
         self.imageToPredict = image

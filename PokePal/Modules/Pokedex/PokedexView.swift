@@ -22,9 +22,13 @@ public struct ShowWebObject: Identifiable {
 public final class ImageProperties {
   var sharpness: Float
   var contrast: Float
+  var preProcess: Bool
   
-  init(sharpness: Float, contrast: Float) {
+  init(sharpness: Float,
+       contrast: Float,
+       preProcess: Bool = true) {
     self.sharpness = sharpness
+    self.preProcess = preProcess
     self.contrast = contrast
   }
 }
@@ -72,85 +76,98 @@ public struct PokedexView: View {
   
   public var body: some View {
     VStack {
-      HStack {
+      HStack(alignment: .top) {
+        CircleView(viewModel: .init(size: 65, color: .blue, lineWidth: 7))
+        Spacer()
+          .frame(maxWidth: 30)
+        HStack(spacing: 16) {
+          CircleView(viewModel: .init(size: 20, color: .red, lineWidth: 3))
+          CircleView(viewModel: .init(size: 20, color: .yellow, lineWidth: 3))
+          CircleView(viewModel: .init(size: 20, color: .green, lineWidth: 3))
+        }
+        
         Spacer()
         Button {
           viewModel.showDebugMenu = true
         } label: {
           Image(systemName: "ladybug.fill")
             .foregroundColor(.white)
-            .padding()
             .opacity(0.6)
         }
         .disabled(viewModel.ready == false)
+        .frame(height: 5)
       }
-      .frame(height: 5)
+      .padding([.leading, .trailing], 25)
+      .padding(.top, 17)
+      
+      Spacer()
+        .frame(maxHeight: 30)
+      
+      Rectangle()
+        .foregroundStyle(Gradient(colors: [.black.opacity(0.2), .white.opacity(0.2)]))
+        .frame(height: 5)
+        .shadow(color: .black, radius: 5, x: 0, y: 5)
+        .padding(.bottom, 16)
+      
       ZStack {
+        RoundedRectangle(cornerRadius: 25.0,
+                                    style: .continuous)
+        .fill(.white)
+        .frame(width: 64 * 5 + 80, height: 64 * 5 + 100)
+        .shadow(color: .black.opacity(0.5), radius: 5, x: 0.0, y: 5)
+        
+        RoundedRectangle(cornerRadius: 25.0,
+                                    style: .continuous)
+        .fill(.black)
+        .stroke(Gradient(colors: [.black.opacity(0.2), .white.opacity(0.2)]), lineWidth: 20)
+        .frame(width: 64 * 5 + 20, height: 64 * 5 + 20)
+
         ViewfinderView(image: viewModel.viewfinderImage)
-          .background(
-            Image(.pokeball)
-              .resizable())
-          .frame(width: 64 * 4.7, height: 64 * 4.7)
-          .offset(CGSize(width: 10, height: -48))
-        Image(.pokedex)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .shadow(color: .black.opacity(0.4),
-                  radius: 10)
+          .clipShape(RoundedRectangle(cornerRadius: 25.0,
+                                      style: .continuous))
+          .frame(width: 64 * 5, height: 64 * 5)
+          .compositingGroup()
+          .shadow(color: .black.opacity(0.5), radius: 10, x: 0.0, y: 5)
+          .gesture(MagnifyGesture()
+                      .onChanged { value in
+                        module.pinchToZoom(value.velocity)
+                      })
+        
       }
-      HStack {
+
+      Rectangle()
+        .foregroundStyle(Gradient(colors: [.black.opacity(0.2), .white.opacity(0.2)]))
+        .frame(height: 5)
+        .shadow(color: .black, radius: 5, x: 0, y: 5)
+        .padding(.top, 16)
+      
+      Spacer()
+        .frame(maxHeight: 100)
+      
+      HStack(spacing: 50) {
         Spacer()
         
-        Button {
+        ButtonView(viewModel: .init(size: CGSize(width: 120, height: 80), color: .blue, image: Image(systemName: "arrow.triangle.2.circlepath.camera"))) {
           startCapture()
-        } label: {
-          Circle()
-            .frame(width: 60, height: 60)
-            .foregroundColor(.white)
-            .overlay {
-              Circle()
-                .strokeBorder(style: .init(lineWidth: 2))
-                .foregroundColor(.black.opacity(0.6))
-                .frame(width: 50)
-              Image(systemName: "arrow.clockwise")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 25, height: 25)
-                .foregroundColor(.black)
-            }
-            .opacity(0.6)
         }
         .isHidden(viewModel.ready == false)
         .disabled(viewModel.ready == false)
         
-        Button {
+        ButtonView(viewModel: .init(size: CGSize(width: 120, height: 80), color: .green, image:               Image(systemName: "camera.viewfinder"))) {
           Task {
             await module.whosThatPokemon()
           }
-        } label: {
-          Circle()
-            .frame(width: 60, height: 60)
-            .foregroundColor(.white)
-            .overlay {
-              Circle()
-                .strokeBorder(style: .init(lineWidth: 2))
-                .foregroundColor(.black.opacity(0.6))
-                .frame(width: 50)
-            }
-            .opacity(0.6)
         }
         .isHidden(viewModel.ready == false)
         .disabled(viewModel.ready == false)
 
-        
         Spacer()
       }
       .padding(.bottom, 32)
+      
+      Spacer()
     }
-    .background(Image(.woods)
-      .resizable()
-      .blur(radius: 10)
-      .ignoresSafeArea())
+    .background(Gradient(colors: [.red.opacity(0.7), .red]))
     .fullscreen()
     .onChange(of: viewModel.takingPhotos, { oldValue, newValue in
       if newValue == false {

@@ -28,6 +28,12 @@ struct DebugView: View {
         .resizable()
         .frame(width: 64 * 4.7, height: 64 * 4.7)
       
+      Toggle(isOn: $imageProperties.preProcess) {
+        Text("Pre process")
+      }
+      .padding([.leading, .trailing])
+      .padding(.bottom, 16)
+      
       Text("Contrast - \(String(format: "%.1f", imageProperties.contrast))")
       Slider(value: $imageProperties.contrast, in: 0...5)
         .padding([.leading, .trailing])
@@ -43,5 +49,6 @@ struct DebugView: View {
 #Preview {
   DebugView(viewModel: .init(inferenceImage: .init(.pokeball)),
             imageProperties: .constant(.init(sharpness: 0.8,
-                                             contrast: 1.5)))
+                                             contrast: 1.5,
+                                             preProcess: true)))
 }
