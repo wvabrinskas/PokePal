@@ -80,7 +80,7 @@ public struct PokedexView: View {
         CircleView(viewModel: .init(size: 65, color: .blue, lineWidth: 7))
         Spacer()
           .frame(maxWidth: 30)
-        HStack(spacing: 16) {
+        HStack(spacing: 8) {
           CircleView(viewModel: .init(size: 20, color: .red, lineWidth: 3))
           CircleView(viewModel: .init(size: 20, color: .yellow, lineWidth: 3))
           CircleView(viewModel: .init(size: 20, color: .green, lineWidth: 3))
@@ -117,11 +117,16 @@ public struct PokedexView: View {
         .frame(width: 64 * 5 + 80, height: 64 * 5 + 100)
         .shadow(color: .black.opacity(0.5), radius: 5, x: 0.0, y: 5)
         
+        CircleView(viewModel: .init(size: 20, color: .red, lineWidth: 3))
+          .padding(.leading, 35)
+          .padding(.bottom, 13)
+          .align(.bottomLeading)
+        
         RoundedRectangle(cornerRadius: 25.0,
                                     style: .continuous)
         .fill(.black)
         .stroke(Gradient(colors: [.black.opacity(0.2), .white.opacity(0.2)]), lineWidth: 20)
-        .frame(width: 64 * 5 + 20, height: 64 * 5 + 20)
+        .frame(width: 64 * 5, height: 64 * 5)
 
         ViewfinderView(image: viewModel.viewfinderImage)
           .clipShape(RoundedRectangle(cornerRadius: 25.0,
@@ -148,13 +153,17 @@ public struct PokedexView: View {
       HStack(spacing: 50) {
         Spacer()
         
-        ButtonView(viewModel: .init(size: CGSize(width: 120, height: 80), color: .blue, image: Image(systemName: "arrow.triangle.2.circlepath.camera"))) {
+        ButtonView(viewModel: .init(size: CGSize(width: 120, height: 80), 
+                                    color: .blue,
+                                    image: Image(systemName: "arrow.triangle.2.circlepath.camera"))) {
           startCapture()
         }
         .isHidden(viewModel.ready == false)
         .disabled(viewModel.ready == false)
         
-        ButtonView(viewModel: .init(size: CGSize(width: 120, height: 80), color: .green, image:               Image(systemName: "camera.viewfinder"))) {
+        ButtonView(viewModel: .init(size: CGSize(width: 120, height: 80),
+                                    color: .green,
+                                    image: Image(systemName: "camera.viewfinder"))) {
           Task {
             await module.whosThatPokemon()
           }

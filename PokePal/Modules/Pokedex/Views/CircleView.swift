@@ -25,11 +25,17 @@ struct CircleView: View {
         Circle()
           .fill(RadialGradient(gradient: Gradient(colors: [.white.opacity(0.5), .clear]), center: .init(x: 0.7, y: 0.2), startRadius: 5, endRadius: 40))
       }
-      .shadow(radius: 5)
+      .shadow(color: .white.opacity(0.1), radius: 3, x: 5, y: -5)
+      .shadow(color: .black.opacity(0.2), radius: 3, x: -5, y: 5)
+      .frame(width: viewModel.size + 10, height: viewModel.size + 10)
+      .clipShape(
+        Circle()
+      )
   }
 }
 
 #Preview {
   CircleView(viewModel: .init(size: 80, color: .blue, lineWidth: 7))
     .preview()
+    .background(Color.red)
 }
