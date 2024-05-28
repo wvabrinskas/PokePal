@@ -113,6 +113,7 @@ public struct PokedexView: View {
         RoundedRectangle(cornerRadius: 25.0,
                                     style: .continuous)
         .fill(.white)
+        .stroke(Gradient(colors: [.white.opacity(0.8), .black.opacity(0.2)]), lineWidth: 4)
         .frame(width: 64 * 5 + 80, height: 64 * 5 + 100)
         .shadow(color: .black.opacity(0.5), radius: 5, x: 0.0, y: 5)
         
