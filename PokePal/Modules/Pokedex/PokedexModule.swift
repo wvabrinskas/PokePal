@@ -76,7 +76,9 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
       }
 
       Task { @MainActor in
-        self.viewModel.ready = true
+        withAnimation {
+          self.viewModel.ready = true
+        }
       }
     }
   }
@@ -141,7 +143,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
         }
         
         viewModel.inferenceImage = Image(uiImage: imageToUse)
-        continuation.resume(returning: await getPrdiction(image: imageToUse))
+        continuation.resume(returning: await getPrediction(image: imageToUse))
       }
     }
     
@@ -157,7 +159,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   // MARK:  private
   
   // expects image of size 64 x 64
-  private func getPrdiction(image: UIImage) async -> [PokemonResult] {
+  private func getPrediction(image: UIImage) async -> [PokemonResult] {
     await withUnsafeContinuation { continuation in
       guard let sequential else { return }
       Task.detached {

@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:wvabrinskas/Neuron.git",
       "state" : {
-        "branch" : "rnn-rework",
-        "revision" : "992f09a4caffd1ea135e39d69549714f5b5669e0"
+        "branch" : "develop",
+        "revision" : "b6ee0f4346d4b045f967565474203557fc147618"
       }
     },
     {

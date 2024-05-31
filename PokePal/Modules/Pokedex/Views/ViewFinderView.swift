@@ -12,19 +12,31 @@ struct ViewfinderView: View {
   var image: Image?
   
   var body: some View {
-    GeometryReader { geometry in
-      if let image = image {
+    if let image = image {
+      GeometryReader { geometry in
         image
           .resizable()
           .scaledToFill()
           .frame(width: geometry.size.width, height: geometry.size.height)
       }
+    } else {
+      LoadingView(fontSize: 20)
+        .padding()
+        .align(.center)
+        .padding(.bottom, 32)
     }
+
   }
 }
 
-//struct ViewfinderView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    ViewfinderView(image: .constant(Image(systemName: "pencil")))
-//  }
-//}
+struct ViewfinderView_Previews: PreviewProvider {
+  static var previews: some View {
+    ViewfinderView(image: Image("pokeball"))
+      .frame(width: 64 * 5, height: 64 * 5)
+      .preview()
+    
+    ViewfinderView(image: nil)
+      .frame(width: 64 * 5, height: 64 * 5)
+      .preview()
+  }
+}
