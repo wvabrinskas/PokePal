@@ -28,44 +28,27 @@ struct ResultsView: View {
   
   var body: some View {
     VStack(spacing: 0) {
-      Button {
+      SeparatorView(edges: .top, padding: 0)
+      
+      ButtonView(viewModel: .init(size: CGSize(width: 150,
+                                               height: 40),
+                                  color: .blue,
+                                  image: Image(systemName: "stop.circle"))) {
         viewModel.takingPhotos.wrappedValue = false
         dismiss()
-      } label: {
-        HStack {
-          Image(systemName: "xmark")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 15)
-            .foregroundColor(.white)
-            .bold()
-            .offset(y: 2)
-          Text("stop")
-            .foregroundStyle(Color.white)
-            .font(.title)
-            .fontDesign(.rounded)
-            .fontWeight(.bold)
-        }
-        .padding(8)
-        .frame(width: 100, height: 50)
-        .background(RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundStyle(Color.red))
       }
-      .padding(.top, 16)
       .isHidden(viewModel.showStop == false, remove: true)
-      List {
+      
+      VStack(spacing: 24) {
         ForEach(0..<viewModel.results.count, id: \.self) { index in
           let pokemon = viewModel.results[index]
           HStack {
             Text(pokemon.pokemon.name().replacingOccurrences(of: "_", with: " "))
-              .font(.system(size: index == 0 ? 25 : 22))
-              .fontDesign(.rounded)
-              .fontWeight(index == 0 ? .heavy : .medium)
+              .font(.pressStart(size: index == 0 ? 22 : 18))
               .bold(index == 0)
             Spacer()
             Text("\(String(format: "%.1f", pokemon.confidence * 100))%")
-              .font(.system(size: index == 0 ? 30 : 22))
-              .fontDesign(.rounded)
-              .fontWeight(index == 0 ? .heavy : .medium)
+              .font(.pressStart(size: index == 0 ? 20 : 16))
               .bold(index == 0)
             Button {
               onTap(pokemon)
@@ -75,22 +58,24 @@ struct ResultsView: View {
                 .padding(.leading, 8)
             }
           }
+          .onTapGesture {
+            onTap(pokemon)
+          }
+          .padding([.leading, .trailing], 21)
           .opacity(index == 0 ? 1.0 : 0.8)
         }
-        .listRowSpacing(0)
-        .listRowInsets(.none)
-        .listRowBackground(Color.clear)
-        .listRowSeparator(.hidden)
+        Spacer()
       }
-      .scrollContentBackground(.hidden)
+      .padding(.top, viewModel.showStop ? 16 : 32)
     }
+    .background(Gradient(colors: [.red.opacity(0.7), .red]))
+    .fullscreen()
   }
 }
 
 #Preview {
   ResultsView(viewModel: .init(results: [.init(pokemon: .mew, confidence: 0.8),
                                          .init(pokemon: .blastoise, confidence: 0.2), 
-    .init(pokemon: .charizard, confidence: 0.1)], takingPhotos: .constant(true)), onTap: { _ in })
-  .preferredColorScheme(.dark)
-  .presentationBackground(.ultraThinMaterial)
+    .init(pokemon: .charizard, confidence: 0.1)], takingPhotos: .constant(true), showStop: true), onTap: { _ in })
+  .preview()
 }

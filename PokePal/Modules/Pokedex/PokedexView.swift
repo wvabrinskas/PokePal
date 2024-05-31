@@ -103,11 +103,7 @@ public struct PokedexView: View {
       Spacer()
         .frame(maxHeight: 30)
       
-      Rectangle()
-        .foregroundStyle(Gradient(colors: [.black.opacity(0.2), .white.opacity(0.2)]))
-        .frame(height: 5)
-        .shadow(color: .black, radius: 5, x: 0, y: 5)
-        .padding(.bottom, 16)
+      SeparatorView(edges: .bottom, padding: 16)
       
       ZStack {
         RoundedRectangle(cornerRadius: 25.0,
@@ -140,13 +136,9 @@ public struct PokedexView: View {
                       })
         
       }
-
-      Rectangle()
-        .foregroundStyle(Gradient(colors: [.black.opacity(0.2), .white.opacity(0.2)]))
-        .frame(height: 5)
-        .shadow(color: .black, radius: 5, x: 0, y: 5)
-        .padding(.top, 16)
       
+      SeparatorView(edges: .top, padding: 16)
+
       Spacer()
         .frame(maxHeight: 100)
       
@@ -194,10 +186,8 @@ public struct PokedexView: View {
         viewModel.showResultsMenu = false
         viewModel.showWebResult = .init(pokemon: pokemon.pokemon)
       }
-      .preferredColorScheme(.dark)
-      .presentationBackground(.thinMaterial)
-      .presentationDetents([.height(220)])
-      .presentationCornerRadius(40)
+      .presentationDetents([.height(260)])
+      .presentationCornerRadius(0)
     }
     .sheet(isPresented: $viewModel.showDebugMenu) {
       DebugView(viewModel: .init(inferenceImage: viewModel.inferenceImage),

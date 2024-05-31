@@ -27,6 +27,7 @@
 		913FFD162B7DABDE0028D4D7 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD152B7DABDE0028D4D7 /* ResultsView.swift */; };
 		913FFD182B7DB56E0028D4D7 /* WebResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD172B7DB56E0028D4D7 /* WebResultView.swift */; };
 		913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */; };
+		914B952F2C0A63AA00353CED /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B952E2C0A63AA00353CED /* SeparatorView.swift */; };
 		9176A1BC2C064905007B1569 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9176A1BB2C064905007B1569 /* shaders.metal */; };
 		9176A1C02C066E5C007B1569 /* DimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9176A1BF2C066E5C007B1569 /* DimpleView.swift */; };
 		9176A1C42C06A813007B1569 /* pokemon-all-classifier_minified.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 9176A1C32C06A813007B1569 /* pokemon-all-classifier_minified.smodel */; };
@@ -69,6 +70,7 @@
 		913FFD152B7DABDE0028D4D7 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		913FFD172B7DB56E0028D4D7 /* WebResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebResultView.swift; sourceTree = "<group>"; };
 		913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "151-pokemon-classifier.smodel"; sourceTree = "<group>"; };
+		914B952E2C0A63AA00353CED /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		9176A1BB2C064905007B1569 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
 		9176A1BF2C066E5C007B1569 /* DimpleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimpleView.swift; sourceTree = "<group>"; };
 		9176A1C32C06A813007B1569 /* pokemon-all-classifier_minified.smodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pokemon-all-classifier_minified.smodel"; sourceTree = "<group>"; };
@@ -161,10 +163,11 @@
 			isa = PBXGroup;
 			children = (
 				912BDDAE2B7B0BDB00F873EE /* ViewFinderView.swift */,
+				914B952E2C0A63AA00353CED /* SeparatorView.swift */,
+				91956FB32C057F8F00E60484 /* CircleView.swift */,
 				917FD36C2B7D79200096B4AA /* DebugView.swift */,
 				913FFD152B7DABDE0028D4D7 /* ResultsView.swift */,
 				913FFD172B7DB56E0028D4D7 /* WebResultView.swift */,
-				91956FB32C057F8F00E60484 /* CircleView.swift */,
 				91956FB52C05817400E60484 /* ButtonView.swift */,
 				9176A1BF2C066E5C007B1569 /* DimpleView.swift */,
 			);
@@ -343,6 +346,7 @@
 				91C30A272B7D73500071D7F8 /* CameraView.swift in Sources */,
 				912BDDAA2B7B051800F873EE /* UIImage+Tensor.swift in Sources */,
 				9182BEB92C0A510700C4C787 /* Font.swift in Sources */,
+				914B952F2C0A63AA00353CED /* SeparatorView.swift in Sources */,
 				910BCFCB2B7AF7CA0057550D /* Theme.swift in Sources */,
 				9176A1BC2C064905007B1569 /* shaders.metal in Sources */,
 				910BCFC22B7ADD580057550D /* RootRouter.swift in Sources */,
