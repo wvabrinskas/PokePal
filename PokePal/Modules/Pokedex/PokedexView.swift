@@ -177,7 +177,9 @@ public struct PokedexView: View {
       }
     })
     .sheet(item: $viewModel.showWebResult) { result in
-      WebResultView(viewModel: .init(result: result))
+      // open webview
+      router.routeToWebView(result: result)
+        .asAnyView()
     }
     .sheet(isPresented: $viewModel.showResultsMenu) {
       ResultsView(viewModel: .init(results: viewModel.pokemon,

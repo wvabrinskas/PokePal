@@ -16,6 +16,7 @@ import HuddleMacros
 import HuddleArch
 import AVFoundation
 import VisionKit
+import WebKit
 
 public protocol PokedexModuleComponent: Component {
   // add dependencies here
@@ -44,7 +45,8 @@ public final class CameraModel {
 }
 
 public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexModuleComponent, PokedexRouter>,
-                                  PokedexSupporting {
+                                  PokedexSupporting
+        {
   
   enum Model: String {
     case original = "151-pokemon-classifier"
@@ -200,7 +202,6 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
       }
     }
   }
-  
 }
 
 
@@ -215,3 +216,4 @@ fileprivate extension CIImage {
     return Image(decorative: cgImage, scale: 1, orientation: .up)
   }
 }
+

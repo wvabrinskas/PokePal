@@ -47,6 +47,11 @@
 		91C30A262B7D73500071D7F8 /* CameraModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A222B7D73500071D7F8 /* CameraModule.swift */; };
 		91C30A272B7D73500071D7F8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A232B7D73500071D7F8 /* CameraView.swift */; };
 		91C30A282B7D73500071D7F8 /* CameraRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C30A242B7D73500071D7F8 /* CameraRouter.swift */; };
+		91EBB0772C0A9FEA0080A57E /* WebModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0712C0A9FEA0080A57E /* WebModule.swift */; };
+		91EBB0782C0A9FEA0080A57E /* WebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0722C0A9FEA0080A57E /* WebRouter.swift */; };
+		91EBB0792C0A9FEA0080A57E /* WebBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0732C0A9FEA0080A57E /* WebBuilder.swift */; };
+		91EBB07B2C0A9FEA0080A57E /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0752C0A9FEA0080A57E /* WebView.swift */; };
+		91EBB07C2C0A9FEA0080A57E /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0762C0A9FEA0080A57E /* WebViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +94,11 @@
 		91C30A222B7D73500071D7F8 /* CameraModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraModule.swift; sourceTree = "<group>"; };
 		91C30A232B7D73500071D7F8 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		91C30A242B7D73500071D7F8 /* CameraRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraRouter.swift; sourceTree = "<group>"; };
+		91EBB0712C0A9FEA0080A57E /* WebModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebModule.swift; sourceTree = "<group>"; };
+		91EBB0722C0A9FEA0080A57E /* WebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRouter.swift; sourceTree = "<group>"; };
+		91EBB0732C0A9FEA0080A57E /* WebBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBuilder.swift; sourceTree = "<group>"; };
+		91EBB0752C0A9FEA0080A57E /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		91EBB0762C0A9FEA0080A57E /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,7 @@
 		910BCFB92B7ADC510057550D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				91EBB0702C0A9FDB0080A57E /* Web */,
 				91C30A1F2B7D73300071D7F8 /* Camera */,
 				910BCFCC2B7AFA330057550D /* Pokedex */,
 				910BCFBC2B7ADD430057550D /* Root */,
@@ -167,7 +178,6 @@
 				91956FB32C057F8F00E60484 /* CircleView.swift */,
 				917FD36C2B7D79200096B4AA /* DebugView.swift */,
 				913FFD152B7DABDE0028D4D7 /* ResultsView.swift */,
-				913FFD172B7DB56E0028D4D7 /* WebResultView.swift */,
 				91956FB52C05817400E60484 /* ButtonView.swift */,
 				9176A1BF2C066E5C007B1569 /* DimpleView.swift */,
 			);
@@ -252,6 +262,27 @@
 				91C30A232B7D73500071D7F8 /* CameraView.swift */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		91EBB0702C0A9FDB0080A57E /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				91EBB07D2C0AA0280080A57E /* Views */,
+				91EBB0712C0A9FEA0080A57E /* WebModule.swift */,
+				91EBB0722C0A9FEA0080A57E /* WebRouter.swift */,
+				91EBB0732C0A9FEA0080A57E /* WebBuilder.swift */,
+				91EBB0762C0A9FEA0080A57E /* WebViewModel.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		91EBB07D2C0AA0280080A57E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				913FFD172B7DB56E0028D4D7 /* WebResultView.swift */,
+				91EBB0752C0A9FEA0080A57E /* WebView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +396,11 @@
 				91ABCB3B2B78203D00FA7C0C /* ContentView.swift in Sources */,
 				91956FB42C057F8F00E60484 /* CircleView.swift in Sources */,
 				91956FB62C05817400E60484 /* ButtonView.swift in Sources */,
+				91EBB0772C0A9FEA0080A57E /* WebModule.swift in Sources */,
+				91EBB0782C0A9FEA0080A57E /* WebRouter.swift in Sources */,
+				91EBB0792C0A9FEA0080A57E /* WebBuilder.swift in Sources */,
+				91EBB07B2C0A9FEA0080A57E /* WebView.swift in Sources */,
+				91EBB07C2C0A9FEA0080A57E /* WebViewModel.swift in Sources */,
 				910BCFC72B7ADEC60057550D /* View.swift in Sources */,
 				91ABCB392B78203D00FA7C0C /* PokePalApp.swift in Sources */,
 				910BCFD22B7AFA490057550D /* PokedexRouter.swift in Sources */,

@@ -1304,6 +1304,10 @@ public enum Pokemon: Int, CaseIterable {
 
   case unknown
   
+  static var baseHost: String {
+    return "www.serebii.net"
+  }
+  
   static func from(_ rawValue: Int) -> Pokemon {
     guard let from = Pokemon.init(rawValue: rawValue) else {
       return .unknown
@@ -1314,7 +1318,15 @@ public enum Pokemon: Int, CaseIterable {
   
   func url() -> URL? {
     let baseUrl = "https://www.serebii.net/pokemon/"
-    let name = name().split(separator: " ")[0].lowercased()
+    let name = name().replacingOccurrences(of: "_", with: " ")
+      .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)?
+      .lowercased() ?? ""
+    return URL(string: baseUrl + name)
+  }
+  
+  func searchUrl() -> URL? {
+    let baseUrl = "https://www.serebii.net/search.shtml?q="
+    let name = name().replacingOccurrences(of: "_", with: "+")
     return URL(string: baseUrl + name)
   }
   

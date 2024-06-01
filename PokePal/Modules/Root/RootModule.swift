@@ -44,7 +44,10 @@ public final class RootModuleHolder: ModuleHolder, Module, RootSupporting {
                              context: context),
       CameraBuilder().build(parentComponent: component,
                             holder: self,
-                            context: context)]
+                            context: context),
+      WebBuilder().build(parentComponent: component, 
+                         holder: self,
+                         context: context)]
   }
   
   public func onActive() {

@@ -23,6 +23,7 @@ public struct PokedexViewComponentImpl: PokedexViewComponent {
 
 public protocol PokedexRouting: Routing {
   func routeToCameraView() -> any View
+  func routeToWebView(result: ShowWebObject) -> any View
 }
 
 public class PokedexRouter: PokedexRouting, Logger {
@@ -39,6 +40,16 @@ public class PokedexRouter: PokedexRouting, Logger {
     PokedexView(router: self, module: component.module,
                 moduleHolder: component.moduleHolder,
                 viewModel: component.module.viewModel)
+  }
+  
+  public func routeToWebView(result: ShowWebObject) -> any View {
+    guard let webModule: WebSupporting = moduleHolder?.module(),
+          let webRouter: WebRouting = moduleHolder?.router(for: WebSupporting.self) else {
+      return Image(.pokeball)
+    }
+    
+    webModule.updateResult(result)
+    return webRouter.rootView()
   }
   
   public func routeToCameraView() -> any View {

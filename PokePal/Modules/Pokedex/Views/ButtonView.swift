@@ -30,9 +30,9 @@ struct ButtonView: View {
           viewModel.image
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: viewModel.size.height * 0.75, height: viewModel.size.height * 0.75)
+            .frame(width: viewModel.size.width * 0.6, height: viewModel.size.height * 0.6)
             .foregroundStyle(viewModel.color)
-            .layerEffect(ShaderLibrary.embossOut(.float(0.3)), maxSampleOffset: .zero)
+            .layerEffect(ShaderLibrary.embossOut(.float(0.8)), maxSampleOffset: .zero)
             .layerEffect(ShaderLibrary.emboss(.float(0.5)), maxSampleOffset: .zero)
         }
     }
