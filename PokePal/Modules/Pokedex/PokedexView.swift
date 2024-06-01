@@ -180,6 +180,7 @@ public struct PokedexView: View {
       // open webview
       router.routeToWebView(result: result)
         .asAnyView()
+        .presentationCornerRadius(0)
     }
     .sheet(isPresented: $viewModel.showResultsMenu) {
       ResultsView(viewModel: .init(results: viewModel.pokemon,
