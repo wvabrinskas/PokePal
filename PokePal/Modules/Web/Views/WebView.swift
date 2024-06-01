@@ -33,7 +33,7 @@ public struct WebView: View {
           .shadow(color: Color.black, radius: 2, x: -2, y: -2)
           .clipShape(RoundedRectangle(cornerRadius: 15) )
       )
-      .padding([.leading, .trailing], 32)
+      .padding([.leading, .trailing], 16)
     }
     .background(Gradient(colors: [.red.opacity(0.7), .red]))
     .fullscreen()
