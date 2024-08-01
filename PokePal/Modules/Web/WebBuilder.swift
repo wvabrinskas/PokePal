@@ -13,12 +13,12 @@ import HuddleArch
 public protocol WebBuilding: ViewBuilding, ModuleBuilder {}
 
 public struct WebBuilder: WebBuilding {
-  public func buildRouter<T, R>(component: T) -> R? where T : ViewComponent, R : Routing {
+  public static func buildRouter<T, R>(component: T) -> R? where T : ViewComponent, R : Routing {
     guard let c = component as? WebViewComponent else { return nil }
     return WebRouter(component: c) as? R
   }
   
-  public func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> WebModule {
+  public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> WebModule {
       let component = WebModuleComponentImpl(parent: parentComponent)
       let module = WebModule(holder: holder, context: context, component: component)
 

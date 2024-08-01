@@ -221,7 +221,7 @@ struct PokedexView_Previews: PreviewProvider {
   static let rootComponent =  RootComponentImpl()
   static let moduleHolder = RootModuleHolder(context: context, component: rootComponent)
   
-  static let module = PokedexBuilder().build(parentComponent: rootComponent, holder: moduleHolder, context: context)
+  static let module = PokedexBuilder.build(parentComponent: rootComponent, holder: moduleHolder, context: context)
   
   static var previews: some View {
     module.router!.rootView()

@@ -45,7 +45,7 @@ struct WebView_Previews: PreviewProvider {
   static let rootComponent =  RootComponentImpl()
   static let moduleHolder = RootModuleHolder(context: context, component: rootComponent)
 
-  static let module = WebBuilder().build(parentComponent: rootComponent, holder: moduleHolder, context: context)
+  static let module = WebBuilder.build(parentComponent: rootComponent, holder: moduleHolder, context: context)
 
   static var previews: some View {
     module.router!.rootView()

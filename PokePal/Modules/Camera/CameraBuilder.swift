@@ -13,12 +13,12 @@ import HuddleArch
 public protocol CameraBuilding: ViewBuilding, ModuleBuilder {}
 
 public struct CameraBuilder: CameraBuilding {
-  public func buildRouter<T, R>(component: T) -> R? where T : ViewComponent, R : Routing {
+  public static func buildRouter<T, R>(component: T) -> R? where T : ViewComponent, R : Routing {
     guard let c = component as? CameraViewComponent else { return nil }
     return CameraRouter(component: c) as? R
   }
   
-  public func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> CameraModule {
+  public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> CameraModule {
       let component = CameraModuleComponentImpl(parent: parentComponent)
       let module = CameraModule(holder: holder, context: context, component: component)
 

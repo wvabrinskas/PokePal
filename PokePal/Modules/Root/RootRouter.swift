@@ -40,7 +40,7 @@ public class RootRouter: RootRouting, Logger {
   }
   
   public func routeToPokedexView() -> any View {
-    guard let pokedex: PokedexRouting = moduleHolder?.router(for: PokedexSupporting.self) else {
+    guard let pokedex: PokedexRouting = component.module.router(for: PokedexSupporting.self) else {
       return Text("error").asAnyView()
     }
     

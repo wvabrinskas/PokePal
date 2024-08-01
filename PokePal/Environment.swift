@@ -12,8 +12,9 @@ import SwiftUI
 import HuddleArch
 
 struct StateKey: EnvironmentKey {
-  static let defaultValue: RootModuleHolder = RootModuleHolder(context: RootModuleHolderContext(),
-                                                               component: RootComponentImpl())
+  @MainActor static let defaultValue: RootModuleHolder = RootBuilder.build(parentComponent: EmptyComponent(),
+                                                                           holder: nil,
+                                                                           context: .init())
 }
 
 extension EnvironmentValues {
