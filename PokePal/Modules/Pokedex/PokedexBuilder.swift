@@ -9,15 +9,12 @@
 
 import Foundation
 import HuddleArch
+import HuddleMacros
 
 public protocol PokedexBuilding: ViewBuilding, ModuleBuilder {}
 
+@Building(PokedexRouter, PokedexViewComponentImpl)
 public struct PokedexBuilder: PokedexBuilding {
-  public static func buildRouter<T, R>(component: T) -> R? where T : ViewComponent, R : Routing {
-    guard let c = component as? PokedexViewComponent else { return nil }
-    return PokedexRouter(component: c) as? R
-  }
-  
   public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> PokedexModule {
       let component = PokedexModuleComponentImpl(parent: parentComponent)
       let module = PokedexModule(holder: holder, context: context, component: component)

@@ -1,13 +1,13 @@
 {
-  "originHash" : "2a1800b701bed3b0bc598456b1b6533c5313af6ff64656fe1db0ca232cbbb527",
+  "originHash" : "c9eba97ce9ec0c4229c032873057a38c3699715b4f47c5e58ef86f755d7a6b0a",
   "pins" : [
     {
       "identity" : "huddlearch",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:wvabrinskas/HuddleArch.git",
+      "location" : "https://github.com/wvabrinskas/HuddleArch",
       "state" : {
-        "revision" : "64b10104fed33f09c409622ea504d5135ff3b679",
-        "version" : "1.0.11"
+        "revision" : "798352c41b784d63036118ad29728770c00f9a56",
+        "version" : "1.0.14"
       }
     },
     {
@@ -22,10 +22,10 @@
     {
       "identity" : "neuron",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:wvabrinskas/Neuron.git",
+      "location" : "https://github.com/wvabrinskas/Neuron",
       "state" : {
-        "revision" : "7e18d0971636e6577ec280ebb07aa20eb90bba3a",
-        "version" : "2.0.21"
+        "revision" : "806de8c00c87026aa9913f557e179a2875d69a22",
+        "version" : "2.0.23"
       }
     },
     {
@@ -49,10 +49,10 @@
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
       "state" : {
-        "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
-        "version" : "509.1.1"
+        "revision" : "0687f71944021d616d34d922343dcef086855920",
+        "version" : "600.0.1"
       }
     }
   ],

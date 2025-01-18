@@ -51,11 +51,11 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   enum Model: String {
     case original = "151-pokemon-classifier"
     case gen1to3 = "gen1-3-pokemon-classifier"
-    case all = "pokemon-all-classifier_minified" // will cause an OOM error =( working on better import algorithm
+    case all = "pokemon-all-classifier_minified_v3"
   }
   
   public var viewModel: PokedexViewModel = .init(imageProperties: ImageProperties(sharpness: 0.8,
-                                                                                  contrast: 1.5))
+                                                                                  contrast: 1.0))
   
   private var imageToPredict: CIImage?
   
@@ -167,7 +167,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
       Task.detached {
         let imageTensor = Tensor(image.asRGBTensor(zeroCenter: false).value.reversed()) // reversed because the pixel data is BGR not RGB for some reason...
         //let outImage = UIImage.from(imageTensor.value.flatten(), size: (64,64))
-        let pokePrediction = sequential.predict(imageTensor).value.flatten()
+        let pokePrediction = sequential.predict(imageTensor, context: .init()).value.flatten()
         let podium = pokePrediction.sorted(by: { $0 > $1 })[0..<3]
         
         var result: [PokemonResult] = []

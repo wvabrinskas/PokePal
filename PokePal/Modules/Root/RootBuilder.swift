@@ -9,15 +9,12 @@
 
 import Foundation
 import HuddleArch
+import HuddleMacros
 
 public protocol RootBuilding: ViewBuilding, ModuleBuilder {}
 
+@Building(RootRouter, RootViewComponentImpl)
 public struct RootBuilder: RootBuilding {
-  public static func buildRouter<T, R>(component: T) -> R? where T : ViewComponent, R : Routing {
-    guard let c = component as? RootViewComponent else { return nil }
-    return RootRouter(component: c) as? R
-  }
-  
   public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> RootModuleHolder {
       let component = RootComponentImpl(parent: parentComponent)
       let module = RootModuleHolder(holder: holder, context: context, component: component)

@@ -9,15 +9,12 @@
 
 import Foundation
 import HuddleArch
+import HuddleMacros
 
 public protocol CameraBuilding: ViewBuilding, ModuleBuilder {}
 
+@Building(CameraRouter, CameraViewComponentImpl)
 public struct CameraBuilder: CameraBuilding {
-  public static func buildRouter<T, R>(component: T) -> R? where T : ViewComponent, R : Routing {
-    guard let c = component as? CameraViewComponent else { return nil }
-    return CameraRouter(component: c) as? R
-  }
-  
   public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> CameraModule {
       let component = CameraModuleComponentImpl(parent: parentComponent)
       let module = CameraModule(holder: holder, context: context, component: component)
