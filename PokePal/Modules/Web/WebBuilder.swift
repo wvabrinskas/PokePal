@@ -13,7 +13,7 @@ import HuddleMacros
 
 public protocol WebBuilding: ViewBuilding, ModuleBuilder {}
 
-@Building(WebRouter, WebViewComponentImpl)
+@Building(WebRouter.self, WebViewComponentImpl.self)
 public struct WebBuilder: WebBuilding {
   public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> WebModule {
       let component = WebModuleComponentImpl(parent: parentComponent)

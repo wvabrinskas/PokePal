@@ -13,7 +13,7 @@ import HuddleMacros
 
 public protocol RootBuilding: ViewBuilding, ModuleBuilder {}
 
-@Building(RootRouter, RootViewComponentImpl)
+@Building(RootRouter.self, RootViewComponentImpl.self)
 public struct RootBuilder: RootBuilding {
   public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> RootModuleHolder {
       let component = RootComponentImpl(parent: parentComponent)

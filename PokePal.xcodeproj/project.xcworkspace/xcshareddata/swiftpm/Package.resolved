@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wvabrinskas/HuddleArch",
       "state" : {
-        "revision" : "798352c41b784d63036118ad29728770c00f9a56",
-        "version" : "1.0.14"
+        "revision" : "6b7aa3f0df869f9724436f279854ee5990f3d44b",
+        "version" : "1.0.25"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wvabrinskas/Neuron",
       "state" : {
-        "revision" : "806de8c00c87026aa9913f557e179a2875d69a22",
-        "version" : "2.0.23"
+        "revision" : "91716c217c1d3770a119908a699b706c8a82c23b",
+        "version" : "2.1.2"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wvabrinskas/NumSwift.git",
       "state" : {
-        "revision" : "34ebaf5f1e2061063ac7b18edc83135ada57ae0f",
-        "version" : "2.0.13"
+        "revision" : "6c1a9152c7b0868ba8669e86b131c7dcd3b910f0",
+        "version" : "2.0.20"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics",
       "state" : {
-        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
-        "version" : "1.0.2"
+        "revision" : "0c0290ff6b24942dadb83a929ffaaa1481df04a2",
+        "version" : "1.1.1"
       }
     },
     {

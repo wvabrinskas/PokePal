@@ -13,7 +13,7 @@ import HuddleMacros
 
 public protocol PokedexBuilding: ViewBuilding, ModuleBuilder {}
 
-@Building(PokedexRouter, PokedexViewComponentImpl)
+@Building(PokedexRouter.self, PokedexViewComponentImpl.self)
 public struct PokedexBuilder: PokedexBuilding {
   public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> PokedexModule {
       let component = PokedexModuleComponentImpl(parent: parentComponent)

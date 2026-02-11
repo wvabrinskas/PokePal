@@ -44,7 +44,7 @@ public final class RootModuleHolder: ModuleHolder, Module, RootSupporting {
   @Published
   private var readySubject: Bool = false
 
-  public required init(holder: ModuleHolding? = nil, context: Context, component: Component) {
+  public required init(holder: ModuleHolding? = nil, context: Context, component: RootComponentImpl) {
     self.component = component
     self.context = context
     super.init(holder: holder)

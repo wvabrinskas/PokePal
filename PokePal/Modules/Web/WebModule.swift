@@ -29,10 +29,10 @@ public protocol WebSupporting: WKNavigationDelegate, WKUIDelegate {
   func updateResult(_ result: ShowWebObject)
 }
 
-public final class WebModule: ModuleObject<RootModuleHolderContext, WebModuleComponent,  WebRouter>, WebSupporting {
+public final class WebModule: ModuleObject<RootModuleHolderContext, WebModuleComponentImpl,  WebRouter>, WebSupporting {
   public var viewModel: WebViewModel = WebViewModel()
 
-  public required init(holder: ModuleHolding?, context: Context, component: Component) {
+  public required init(holder: ModuleHolding?, context: Context, component: WebModuleComponentImpl) {
     super.init(holder: holder, context: context, component: component)
     
     viewModel.webView.navigationDelegate = self

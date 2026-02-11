@@ -44,7 +44,7 @@ public final class CameraModel {
   var viewfinderImage: Image?
 }
 
-public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexModuleComponent, PokedexRouter>,
+public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexModuleComponentImpl, PokedexRouter>,
                                   PokedexSupporting
         {
   
@@ -63,7 +63,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   
   private let model = Model.all
   
-  public required init(holder: ModuleHolding?, context: Context, component: Component) {
+  public required init(holder: ModuleHolding?, context: Context, component: PokedexModuleComponentImpl) {
     guard let modelUrl = Bundle.main.url(forResource: model.rawValue, withExtension: "smodel") else {
       fatalError("Could not build model")
     }

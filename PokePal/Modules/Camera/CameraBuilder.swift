@@ -13,7 +13,7 @@ import HuddleMacros
 
 public protocol CameraBuilding: ViewBuilding, ModuleBuilder {}
 
-@Building(CameraRouter, CameraViewComponentImpl)
+@Building(CameraRouter.self, CameraViewComponentImpl.self)
 public struct CameraBuilder: CameraBuilding {
   public static func build(parentComponent: Component, holder: ModuleHolding?, context: RootModuleHolderContext) -> CameraModule {
       let component = CameraModuleComponentImpl(parent: parentComponent)

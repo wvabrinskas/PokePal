@@ -31,7 +31,7 @@ public protocol CameraSupporting {
 }
 
 public final class CameraModule: ModuleObject<RootModuleHolderContext,
-                                  CameraModuleComponent,
+                                  CameraModuleComponentImpl,
                                   CameraRouter>,
                                  CameraSupporting,
                                  Logger {
@@ -123,7 +123,7 @@ public final class CameraModule: ModuleObject<RootModuleHolderContext,
     stop()
   }
   
-  public required init(holder: ModuleHolding?, context: Context, component: Component) {
+  public required init(holder: ModuleHolding?, context: Context, component: CameraModuleComponentImpl) {
     super.init(holder: holder, context: context, component: component)
     
     initialize()
