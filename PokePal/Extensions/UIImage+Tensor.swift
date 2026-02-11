@@ -69,7 +69,7 @@ extension UIImage {
     return newImage
   }
   
-  func asRGBTensor(zeroCenter: Bool = false) -> Tensor {
+  func asRGBTensor(zeroCenter: Bool = false, reverse: Bool = false) -> Tensor {
     guard let pixelData = self.cgImage?.dataProvider?.data else { return Tensor() }
     
     let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
@@ -104,9 +104,15 @@ extension UIImage {
       }
     }
     
-    return Tensor([rArray.reshape(columns: Int(self.size.width)),
-                   gArray.reshape(columns: Int(self.size.width)),
-                   bArray.reshape(columns: Int(self.size.width))])
+    var array = [rArray.reshape(columns: Int(self.size.width)),
+                 gArray.reshape(columns: Int(self.size.width)),
+                 bArray.reshape(columns: Int(self.size.width))]
+    
+    if reverse {
+      array = array.reversed()
+    }
+    
+    return Tensor(array)
   }
 
 }

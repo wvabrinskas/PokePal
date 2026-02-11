@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		913FFD162B7DABDE0028D4D7 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD152B7DABDE0028D4D7 /* ResultsView.swift */; };
 		913FFD182B7DB56E0028D4D7 /* WebResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913FFD172B7DB56E0028D4D7 /* WebResultView.swift */; };
 		913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */; };
+		91479DEC2F3CD55E00B7F109 /* Neuron in Frameworks */ = {isa = PBXBuildFile; productRef = 91479DEB2F3CD55E00B7F109 /* Neuron */; };
 		914B952F2C0A63AA00353CED /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B952E2C0A63AA00353CED /* SeparatorView.swift */; };
 		9176A1BC2C064905007B1569 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9176A1BB2C064905007B1569 /* shaders.metal */; };
 		9176A1C02C066E5C007B1569 /* DimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9176A1BF2C066E5C007B1569 /* DimpleView.swift */; };
@@ -46,7 +47,6 @@
 		91E1295E2D3BDD200036C61D /* pokemon-all-classifier_minified_v3.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 91E1295D2D3BDD200036C61D /* pokemon-all-classifier_minified_v3.smodel */; };
 		91E129612D3BDF080036C61D /* HuddleArch in Frameworks */ = {isa = PBXBuildFile; productRef = 91E129602D3BDF080036C61D /* HuddleArch */; };
 		91E129632D3BDF080036C61D /* HuddleMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 91E129622D3BDF080036C61D /* HuddleMacros */; };
-		91E129662D3BDF230036C61D /* Neuron in Frameworks */ = {isa = PBXBuildFile; productRef = 91E129652D3BDF230036C61D /* Neuron */; };
 		91EBB0772C0A9FEA0080A57E /* WebModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0712C0A9FEA0080A57E /* WebModule.swift */; };
 		91EBB0782C0A9FEA0080A57E /* WebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0722C0A9FEA0080A57E /* WebRouter.swift */; };
 		91EBB0792C0A9FEA0080A57E /* WebBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBB0732C0A9FEA0080A57E /* WebBuilder.swift */; };
@@ -108,7 +108,7 @@
 			files = (
 				91E129612D3BDF080036C61D /* HuddleArch in Frameworks */,
 				91E129632D3BDF080036C61D /* HuddleMacros in Frameworks */,
-				91E129662D3BDF230036C61D /* Neuron in Frameworks */,
+				91479DEC2F3CD55E00B7F109 /* Neuron in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +304,7 @@
 			packageProductDependencies = (
 				91E129602D3BDF080036C61D /* HuddleArch */,
 				91E129622D3BDF080036C61D /* HuddleMacros */,
-				91E129652D3BDF230036C61D /* Neuron */,
+				91479DEB2F3CD55E00B7F109 /* Neuron */,
 			);
 			productName = PokePal;
 			productReference = 91ABCB352B78203D00FA7C0C /* PokePal.app */;
@@ -336,7 +336,7 @@
 			mainGroup = 91ABCB2C2B78203D00FA7C0C;
 			packageReferences = (
 				91E1295F2D3BDF080036C61D /* XCRemoteSwiftPackageReference "HuddleArch" */,
-				91E129642D3BDF230036C61D /* XCRemoteSwiftPackageReference "Neuron" */,
+				91479DEA2F3CD55E00B7F109 /* XCLocalSwiftPackageReference "../Neuron" */,
 			);
 			productRefGroup = 91ABCB362B78203D00FA7C0C /* Products */;
 			projectDirPath = "";
@@ -618,6 +618,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		91479DEA2F3CD55E00B7F109 /* XCLocalSwiftPackageReference "../Neuron" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Neuron;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		91E1295F2D3BDF080036C61D /* XCRemoteSwiftPackageReference "HuddleArch" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -627,17 +634,13 @@
 				minimumVersion = 1.0.14;
 			};
 		};
-		91E129642D3BDF230036C61D /* XCRemoteSwiftPackageReference "Neuron" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wvabrinskas/Neuron";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.23;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		91479DEB2F3CD55E00B7F109 /* Neuron */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Neuron;
+		};
 		91E129602D3BDF080036C61D /* HuddleArch */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 91E1295F2D3BDF080036C61D /* XCRemoteSwiftPackageReference "HuddleArch" */;
@@ -647,11 +650,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 91E1295F2D3BDF080036C61D /* XCRemoteSwiftPackageReference "HuddleArch" */;
 			productName = HuddleMacros;
-		};
-		91E129652D3BDF230036C61D /* Neuron */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 91E129642D3BDF230036C61D /* XCRemoteSwiftPackageReference "Neuron" */;
-			productName = Neuron;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

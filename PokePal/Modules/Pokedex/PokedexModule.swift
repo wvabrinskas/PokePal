@@ -75,6 +75,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
       if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
         self.sequential = Sequential.import(modelUrl)
         self.sequential?.compile()
+        self.sequential?.isTraining = false
       }
 
       Task { @MainActor in
@@ -165,9 +166,9 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     await withUnsafeContinuation { continuation in
       guard let sequential else { return }
       Task.detached {
-        let imageTensor = Tensor(image.asRGBTensor(zeroCenter: false).value.reversed()) // reversed because the pixel data is BGR not RGB for some reason...
+        let imageTensor = image.asRGBTensor(zeroCenter: false, reverse: true) // reversed because the pixel data is BGR not RGB for some reason...
         //let outImage = UIImage.from(imageTensor.value.flatten(), size: (64,64))
-        let pokePrediction = sequential.predict(imageTensor, context: .init()).value.flatten()
+        let pokePrediction = sequential.predict(imageTensor, context: .init()).storage
         let podium = pokePrediction.sorted(by: { $0 > $1 })[0..<3]
         
         var result: [PokemonResult] = []
