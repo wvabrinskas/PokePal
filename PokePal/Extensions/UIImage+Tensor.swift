@@ -109,7 +109,9 @@ extension UIImage {
                  bArray.reshape(columns: Int(self.size.width))]
     
     if reverse {
-      array = array.reversed()
+      array = [bArray.reshape(columns: Int(self.size.width)),
+               gArray.reshape(columns: Int(self.size.width)),
+               rArray.reshape(columns: Int(self.size.width))]
     }
     
     return Tensor(array)

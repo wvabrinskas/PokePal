@@ -1,5 +1,5 @@
 {
-  "originHash" : "7a78c407c522eb71064f7c52dea815577acd07391fe72741e71b5fec18ce0585",
+  "originHash" : "c9eba97ce9ec0c4229c032873057a38c3699715b4f47c5e58ef86f755d7a6b0a",
   "pins" : [
     {
       "identity" : "huddlearch",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "72e4516de6c671d00588031098438a933ee0d370",
         "version" : "1.0.7"
+      }
+    },
+    {
+      "identity" : "neuron",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wvabrinskas/Neuron",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "2db932eec7dc9e5b30b1f52dc9025166d76fc7a3"
       }
     },
     {

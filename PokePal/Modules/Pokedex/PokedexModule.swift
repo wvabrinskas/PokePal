@@ -172,13 +172,14 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
         let podium = pokePrediction.sorted(by: { $0 > $1 })[0..<3]
         
         var result: [PokemonResult] = []
-        podium.forEach { p in
-          guard let indexOf = pokePrediction.firstIndex(of: p) else { return }
+        
+        for p in podium {
+          guard let indexOf = pokePrediction.firstIndex(of: p) else { continue }
           let pokemon = Pokemon.from(Int(indexOf + 1)) // adjust since numbers in `Pokemon` enum start with 1
           let confidence = p
           result.append(.init(pokemon: pokemon, confidence: confidence))
         }
-        
+
         continuation.resume(returning: result)
       }
     }
