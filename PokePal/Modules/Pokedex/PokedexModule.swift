@@ -37,6 +37,7 @@ public protocol PokedexSupporting {
   func whosThatPokemon() async
   func start() async
   func pinchToZoom(_ scale: CGFloat)
+  func importModel(from url: URL) async
 }
 
 @Observable
@@ -73,14 +74,13 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
 
     Task.detached {
       if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
-        self.sequential = Sequential.import(modelUrl)
-        self.sequential?.compile()
-        self.sequential?.isTraining = false
-      }
-
-      Task { @MainActor in
-        withAnimation {
-          self.viewModel.ready = true
+        await self.loadModel(at: modelUrl, named: self.model.rawValue)
+      } else {
+        await MainActor.run {
+          withAnimation {
+            self.viewModel.modelName = self.model.rawValue
+            self.viewModel.ready = true
+          }
         }
       }
     }
@@ -159,7 +159,61 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     cameraModule.pinchToZoom(scale)
   }
   
+  // Imports a user provided `.smodel` file from the device, rebuilds the
+  // network with it, and reloads the UI to use the newly imported model.
+  public func importModel(from url: URL) async {
+    let didStartAccess = url.startAccessingSecurityScopedResource()
+    defer {
+      if didStartAccess {
+        url.stopAccessingSecurityScopedResource()
+      }
+    }
+    
+    // Copy the picked file into a location we control. The security scoped URL
+    // handed back by the document picker is not guaranteed to outlive this call.
+    let fileManager = FileManager.default
+    let destination = fileManager.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
+    var modelUrl = url
+    
+    do {
+      if fileManager.fileExists(atPath: destination.path) {
+        try fileManager.removeItem(at: destination)
+      }
+      try fileManager.copyItem(at: url, to: destination)
+      modelUrl = destination
+    } catch {
+      // Fall back to importing directly from the original URL.
+      modelUrl = url
+    }
+    
+    let name = url.deletingPathExtension().lastPathComponent
+    
+    await MainActor.run {
+      withAnimation {
+        viewModel.ready = false
+      }
+    }
+    
+    await loadModel(at: modelUrl, named: name)
+  }
+  
   // MARK:  private
+  
+  // Rebuilds the classifier network from the `.smodel` at `url` and reloads the
+  // UI once the network is ready for inference.
+  private func loadModel(at url: URL, named name: String) async {
+    let sequential = Sequential.import(url)
+    sequential.compile()
+    sequential.isTraining = false
+    self.sequential = sequential
+    
+    await MainActor.run {
+      withAnimation {
+        viewModel.modelName = name
+        viewModel.ready = true
+      }
+    }
+  }
   
   // expects image of size 64 x 64
   private func getPrediction(image: UIImage) async -> [PokemonResult] {
