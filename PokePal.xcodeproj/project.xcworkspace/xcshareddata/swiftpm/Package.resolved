@@ -25,7 +25,7 @@
       "location" : "https://github.com/wvabrinskas/Neuron",
       "state" : {
         "branch" : "develop",
-        "revision" : "2db932eec7dc9e5b30b1f52dc9025166d76fc7a3"
+        "revision" : "7c0e4fb5cdbf05ef2ef5370cbffb93275116654e"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wvabrinskas/NumSwift.git",
       "state" : {
-        "revision" : "6c1a9152c7b0868ba8669e86b131c7dcd3b910f0",
-        "version" : "2.0.20"
+        "revision" : "87f39b537836b2fd7c58a0873fedb3cb18d40249",
+        "version" : "2.0.24"
       }
     },
     {

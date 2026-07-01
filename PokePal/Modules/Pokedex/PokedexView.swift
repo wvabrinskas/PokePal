@@ -22,13 +22,13 @@ public struct ShowWebObject: Identifiable {
 public final class ImageProperties {
   var sharpness: Float
   var contrast: Float
-  var preProcess: Bool
+  var zeroCenter: Bool
   
   init(sharpness: Float,
        contrast: Float,
-       preProcess: Bool = true) {
+       zeroCenter: Bool = true) {
     self.sharpness = sharpness
-    self.preProcess = preProcess
+    self.zeroCenter = zeroCenter
     self.contrast = contrast
   }
 }

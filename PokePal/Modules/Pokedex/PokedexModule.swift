@@ -102,54 +102,25 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   }
   
   public func whosThatPokemon() async {
-    // move off main thread
-    let result: [PokemonResult] = await withUnsafeContinuation { [self] continuation in
-      Task { @MainActor in
-        guard var imageToPredict else {
-          continuation.resume(returning: [])
-          return
-        }
-        
-        if viewModel.imageProperties.preProcess {
-          imageToPredict = imageToPredict.applyingFilter("CIColorControls",
-                                                         parameters: [
-                                                          "inputContrast" : viewModel.imageProperties.contrast
-                                                         ])
-          
-          imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
-                                                         parameters: [
-                                                          "inputSharpness" : viewModel.imageProperties.sharpness
-                                                         ])
-          
-        }
-        
-        guard let imageRezised = imageToPredict.uiImage?.resizeImage(targetSize: CGSize(width: 64, height: 64)) else {
-          continuation.resume(returning: [])
-          return
-        }
-        
-        var imageToUse = imageRezised
-
-        if viewModel.imageProperties.preProcess {
-          let analyser = ImageAnalyzer()
-          let interaction = ImageAnalysisInteraction()
-          let configuration = ImageAnalyzer.Configuration([.text, .visualLookUp, .machineReadableCode])
-          let analysis = try? await analyser.analyze(imageToUse, configuration: configuration)
-          interaction.analysis = analysis
-          
-          if let uiImage = try? await interaction.image(for: interaction.subjects) {
-            if let whiteImage = UIImage(color: .white, size: CGSize(width: 64, height: 64))?.resizeImage(targetSize: CGSize(width: 64, height: 64)) {
-              let mergedImage = whiteImage.mergeWith(topImage: uiImage)
-              imageToUse = mergedImage
-            }
-          }
-        }
-        
-        viewModel.inferenceImage = Image(uiImage: imageToUse)
-        continuation.resume(returning: await getPrediction(image: imageToUse))
-      }
+    guard var imageToPredict else {
+      return
     }
+  
+    imageToPredict = imageToPredict.applyingFilter("CIColorControls",
+                                                   parameters: [
+                                                    "inputContrast" : viewModel.imageProperties.contrast
+                                                   ])
     
+    imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
+                                                   parameters: [
+                                                    "inputSharpness" : viewModel.imageProperties.sharpness
+                                                   ])
+    
+    guard let imageRezised = imageToPredict.uiImage?.resizeImage(targetSize: CGSize(width: 64, height: 64)) else {
+      return
+    }
+        
+    let result = await getPrediction(image: imageRezised)
     viewModel.pokemon = result
     viewModel.showResultsMenu = true
   }
@@ -219,9 +190,14 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   private func getPrediction(image: UIImage) async -> [PokemonResult] {
     await withUnsafeContinuation { continuation in
       guard let sequential else { return }
-      Task.detached {
-        let imageTensor = image.asRGBTensor(zeroCenter: false, reverse: true) // reversed because the pixel data is BGR not RGB for some reason...
-        //let outImage = UIImage.from(imageTensor.value.flatten(), size: (64,64))
+      Task.detached { [weak self] in
+        guard let self else { return }
+        
+        let imageTensor = image.asRGBTensor(zeroCenter: viewModel.imageProperties.zeroCenter, reverse: true) // reversed because the pixel data is BGR not RGB for some reason...
+        
+        let outImage = UIImage.from(imageTensor)
+        viewModel.inferenceImage = Image(uiImage: outImage)
+
         let pokePrediction = sequential.predict(imageTensor, context: .init()).storage
         let podium = pokePrediction.sorted(by: { $0 > $1 })[0..<3]
         

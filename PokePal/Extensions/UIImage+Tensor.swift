@@ -69,6 +69,43 @@ extension UIImage {
     return newImage
   }
   
+  // Reconstructs a UIImage from a tensor produced by asRGBTensor(zeroCenter: false).
+  // Tensor layout: depth=3 (R/G/B), each slice flat row-major [rows * columns].
+  static func from(_ tensor: Tensor) -> UIImage {
+    guard tensor.size.depth == 3 else { return UIImage() }
+
+    let height = tensor.size.rows
+    let width = tensor.size.columns
+    let rSlice = tensor.depthSlice(0)
+    let gSlice = tensor.depthSlice(1)
+    let bSlice = tensor.depthSlice(2)
+
+    var rgba = [UInt8](repeating: 255, count: width * height * 4)
+    for i in 0..<(width * height) {
+      rgba[i * 4 + 0] = UInt8(min(max(rSlice[i] * 255.0, 0), 255))
+      rgba[i * 4 + 1] = UInt8(min(max(gSlice[i] * 255.0, 0), 255))
+      rgba[i * 4 + 2] = UInt8(min(max(bSlice[i] * 255.0, 0), 255))
+      rgba[i * 4 + 3] = 255
+    }
+
+    guard let provider = CGDataProvider(data: Data(rgba) as CFData),
+          let cgImage = CGImage(
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bitsPerPixel: 32,
+            bytesPerRow: width * 4,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: .defaultIntent
+          ) else { return UIImage() }
+
+    return UIImage(cgImage: cgImage)
+  }
+  
   func asRGBTensor(zeroCenter: Bool = false, reverse: Bool = false) -> Tensor {
     guard let pixelData = self.cgImage?.dataProvider?.data else { return Tensor() }
     

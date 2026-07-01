@@ -36,8 +36,8 @@ struct DebugView: View {
         .resizable()
         .frame(width: 64 * 4.7, height: 64 * 4.7)
       
-      Toggle(isOn: $imageProperties.preProcess) {
-        Text("Pre process")
+      Toggle(isOn: $imageProperties.zeroCenter) {
+        Text("Zero center image values")
       }
       .padding([.leading, .trailing])
       .padding(.bottom, 16)
@@ -100,7 +100,7 @@ struct DebugView: View {
   DebugView(viewModel: .init(inferenceImage: .init(.pokeball)),
             imageProperties: .constant(.init(sharpness: 0.8,
                                              contrast: 1.5,
-                                             preProcess: true)),
+                                             zeroCenter: true)),
             modelName: "pokemon-all-classifier_minified",
             onImportModel: { _ in })
 }
