@@ -15,5 +15,25 @@
 	<array>
 		<string>PressStart2P-Regular.ttf</string>
 	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.wvabrinskas.PokePal.smodel</string>
+			<key>UTTypeDescription</key>
+			<string>Neuron Model</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>smodel</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

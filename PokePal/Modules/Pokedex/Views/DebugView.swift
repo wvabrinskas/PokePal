@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 @Observable
 public class DebugViewModel {
@@ -20,6 +21,13 @@ struct DebugView: View {
   
   let viewModel: DebugViewModel
   @Binding var imageProperties: ImageProperties
+  var modelName: String
+  var onImportModel: (URL) -> Void
+  
+  @State private var showImporter = false
+  @State private var importError: String?
+  
+  private static let smodelType = UTType(filenameExtension: "smodel") ?? .data
   
   var body: some View {
     VStack {
@@ -28,8 +36,8 @@ struct DebugView: View {
         .resizable()
         .frame(width: 64 * 4.7, height: 64 * 4.7)
       
-      Toggle(isOn: $imageProperties.preProcess) {
-        Text("Pre process")
+      Toggle(isOn: $imageProperties.zeroCenter) {
+        Text("Zero center image values")
       }
       .padding([.leading, .trailing])
       .padding(.bottom, 16)
@@ -42,6 +50,48 @@ struct DebugView: View {
       Text("Sharpness - \(String(format: "%.1f", imageProperties.sharpness))")
       Slider(value: $imageProperties.sharpness, in: 0...5)
         .padding([.leading, .trailing])
+        .padding(.bottom, 16)
+      
+      modelSection
+    }
+  }
+  
+  private var modelSection: some View {
+    VStack(spacing: 8) {
+      Text("Model")
+        .font(.headline)
+      
+      Text(modelName.isEmpty ? "No model loaded" : modelName)
+        .font(.subheadline)
+        .multilineTextAlignment(.center)
+        .foregroundColor(.secondary)
+      
+      Button {
+        showImporter = true
+      } label: {
+        Label("Import model", systemImage: "square.and.arrow.down")
+      }
+      .buttonStyle(.borderedProminent)
+      
+      if let importError {
+        Text(importError)
+          .font(.caption)
+          .foregroundColor(.red)
+          .multilineTextAlignment(.center)
+      }
+    }
+    .padding([.leading, .trailing])
+    .fileImporter(isPresented: $showImporter,
+                  allowedContentTypes: [DebugView.smodelType],
+                  allowsMultipleSelection: false) { result in
+      switch result {
+      case .success(let urls):
+        guard let url = urls.first else { return }
+        importError = nil
+        onImportModel(url)
+      case .failure(let error):
+        importError = error.localizedDescription
+      }
     }
   }
 }
@@ -50,5 +100,7 @@ struct DebugView: View {
   DebugView(viewModel: .init(inferenceImage: .init(.pokeball)),
             imageProperties: .constant(.init(sharpness: 0.8,
                                              contrast: 1.5,
-                                             preProcess: true)))
+                                             zeroCenter: true)),
+            modelName: "pokemon-all-classifier_minified",
+            onImportModel: { _ in })
 }

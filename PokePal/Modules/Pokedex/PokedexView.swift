@@ -22,13 +22,13 @@ public struct ShowWebObject: Identifiable {
 public final class ImageProperties {
   var sharpness: Float
   var contrast: Float
-  var preProcess: Bool
+  var zeroCenter: Bool
   
   init(sharpness: Float,
        contrast: Float,
-       preProcess: Bool = true) {
+       zeroCenter: Bool = false) {
     self.sharpness = sharpness
-    self.preProcess = preProcess
+    self.zeroCenter = zeroCenter
     self.contrast = contrast
   }
 }
@@ -44,6 +44,7 @@ public final class PokedexViewModel {
   var showWebResult: ShowWebObject?
   var imageProperties: ImageProperties
   var takingPhotos: Bool
+  var modelName: String
   
   public init(viewfinderImage: Image? = nil,
               inferenceImage: Image? = nil,
@@ -53,7 +54,8 @@ public final class PokedexViewModel {
               showResultsMenu: Bool = false,
               showWebResult: ShowWebObject? = nil,
               imageProperties: ImageProperties,
-              takingPhotos: Bool = false) {
+              takingPhotos: Bool = false,
+              modelName: String = "") {
     self.viewfinderImage = viewfinderImage
     self.ready = ready
     self.pokemon = pokemon
@@ -63,6 +65,7 @@ public final class PokedexViewModel {
     self.showWebResult = showWebResult
     self.imageProperties = imageProperties
     self.takingPhotos = takingPhotos
+    self.modelName = modelName
   }
 }
 
@@ -194,7 +197,12 @@ public struct PokedexView: View {
     }
     .sheet(isPresented: $viewModel.showDebugMenu) {
       DebugView(viewModel: .init(inferenceImage: viewModel.inferenceImage),
-                imageProperties: $viewModel.imageProperties)
+                imageProperties: $viewModel.imageProperties,
+                modelName: viewModel.modelName) { url in
+        Task {
+          await module.importModel(from: url)
+        }
+      }
     }
   }
   

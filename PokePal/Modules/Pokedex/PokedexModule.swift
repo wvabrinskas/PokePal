@@ -37,6 +37,7 @@ public protocol PokedexSupporting {
   func whosThatPokemon() async
   func start() async
   func pinchToZoom(_ scale: CGFloat)
+  func importModel(from url: URL) async
 }
 
 @Observable
@@ -51,7 +52,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   enum Model: String {
     case original = "151-pokemon-classifier"
     case gen1to3 = "gen1-3-pokemon-classifier"
-    case all = "pokemon-all-classifier_minified"
+    case all = "pokemon_v4"
   }
   
   public var viewModel: PokedexViewModel = .init(imageProperties: ImageProperties(sharpness: 0.8,
@@ -73,14 +74,13 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
 
     Task.detached {
       if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
-        self.sequential = Sequential.import(modelUrl)
-        self.sequential?.compile()
-        self.sequential?.isTraining = false
-      }
-
-      Task { @MainActor in
-        withAnimation {
-          self.viewModel.ready = true
+        await self.loadModel(at: modelUrl, named: self.model.rawValue)
+      } else {
+        await MainActor.run {
+          withAnimation {
+            self.viewModel.modelName = self.model.rawValue
+            self.viewModel.ready = true
+          }
         }
       }
     }
@@ -102,54 +102,25 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   }
   
   public func whosThatPokemon() async {
-    // move off main thread
-    let result: [PokemonResult] = await withUnsafeContinuation { [self] continuation in
-      Task { @MainActor in
-        guard var imageToPredict else {
-          continuation.resume(returning: [])
-          return
-        }
-        
-        if viewModel.imageProperties.preProcess {
-          imageToPredict = imageToPredict.applyingFilter("CIColorControls",
-                                                         parameters: [
-                                                          "inputContrast" : viewModel.imageProperties.contrast
-                                                         ])
-          
-          imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
-                                                         parameters: [
-                                                          "inputSharpness" : viewModel.imageProperties.sharpness
-                                                         ])
-          
-        }
-        
-        guard let imageRezised = imageToPredict.uiImage?.resizeImage(targetSize: CGSize(width: 64, height: 64)) else {
-          continuation.resume(returning: [])
-          return
-        }
-        
-        var imageToUse = imageRezised
-
-        if viewModel.imageProperties.preProcess {
-          let analyser = ImageAnalyzer()
-          let interaction = ImageAnalysisInteraction()
-          let configuration = ImageAnalyzer.Configuration([.text, .visualLookUp, .machineReadableCode])
-          let analysis = try? await analyser.analyze(imageToUse, configuration: configuration)
-          interaction.analysis = analysis
-          
-          if let uiImage = try? await interaction.image(for: interaction.subjects) {
-            if let whiteImage = UIImage(color: .white, size: CGSize(width: 64, height: 64))?.resizeImage(targetSize: CGSize(width: 64, height: 64)) {
-              let mergedImage = whiteImage.mergeWith(topImage: uiImage)
-              imageToUse = mergedImage
-            }
-          }
-        }
-        
-        viewModel.inferenceImage = Image(uiImage: imageToUse)
-        continuation.resume(returning: await getPrediction(image: imageToUse))
-      }
+    guard var imageToPredict else {
+      return
     }
+  
+    imageToPredict = imageToPredict.applyingFilter("CIColorControls",
+                                                   parameters: [
+                                                    "inputContrast" : viewModel.imageProperties.contrast
+                                                   ])
     
+    imageToPredict = imageToPredict.applyingFilter("CISharpenLuminance",
+                                                   parameters: [
+                                                    "inputSharpness" : viewModel.imageProperties.sharpness
+                                                   ])
+    
+    guard let imageRezised = imageToPredict.uiImage?.resizeImage(targetSize: CGSize(width: 64, height: 64)) else {
+      return
+    }
+        
+    let result = await getPrediction(image: imageRezised)
     viewModel.pokemon = result
     viewModel.showResultsMenu = true
   }
@@ -159,15 +130,74 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
     cameraModule.pinchToZoom(scale)
   }
   
+  // Imports a user provided `.smodel` file from the device, rebuilds the
+  // network with it, and reloads the UI to use the newly imported model.
+  public func importModel(from url: URL) async {
+    let didStartAccess = url.startAccessingSecurityScopedResource()
+    defer {
+      if didStartAccess {
+        url.stopAccessingSecurityScopedResource()
+      }
+    }
+    
+    // Copy the picked file into a location we control. The security scoped URL
+    // handed back by the document picker is not guaranteed to outlive this call.
+    let fileManager = FileManager.default
+    let destination = fileManager.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
+    var modelUrl = url
+    
+    do {
+      if fileManager.fileExists(atPath: destination.path) {
+        try fileManager.removeItem(at: destination)
+      }
+      try fileManager.copyItem(at: url, to: destination)
+      modelUrl = destination
+    } catch {
+      // Fall back to importing directly from the original URL.
+      modelUrl = url
+    }
+    
+    let name = url.deletingPathExtension().lastPathComponent
+    
+    await MainActor.run {
+      withAnimation {
+        viewModel.ready = false
+      }
+    }
+    
+    await loadModel(at: modelUrl, named: name)
+  }
+  
   // MARK:  private
+  
+  // Rebuilds the classifier network from the `.smodel` at `url` and reloads the
+  // UI once the network is ready for inference.
+  private func loadModel(at url: URL, named name: String) async {
+    let sequential = Sequential.import(url)
+    sequential.compile()
+    sequential.isTraining = false
+    self.sequential = sequential
+    
+    await MainActor.run {
+      withAnimation {
+        viewModel.modelName = name
+        viewModel.ready = true
+      }
+    }
+  }
   
   // expects image of size 64 x 64
   private func getPrediction(image: UIImage) async -> [PokemonResult] {
     await withUnsafeContinuation { continuation in
       guard let sequential else { return }
-      Task.detached {
-        let imageTensor = image.asRGBTensor(zeroCenter: false, reverse: true) // reversed because the pixel data is BGR not RGB for some reason...
-        //let outImage = UIImage.from(imageTensor.value.flatten(), size: (64,64))
+      Task.detached { [weak self] in
+        guard let self else { return }
+        
+        let imageTensor = image.asRGBTensor(zeroCenter: viewModel.imageProperties.zeroCenter, reverse: true) // reversed because the pixel data is BGR not RGB for some reason...
+        
+        let outImage = UIImage.from(imageTensor)
+        viewModel.inferenceImage = Image(uiImage: outImage)
+
         let pokePrediction = sequential.predict(imageTensor, context: .init()).storage
         let podium = pokePrediction.sorted(by: { $0 > $1 })[0..<3]
         
