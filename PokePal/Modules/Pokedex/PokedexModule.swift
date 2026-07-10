@@ -52,7 +52,7 @@ public final class PokedexModule: ModuleObject<RootModuleHolderContext, PokedexM
   enum Model: String {
     case original = "151-pokemon-classifier"
     case gen1to3 = "gen1-3-pokemon-classifier"
-    case all = "pokemon-all-classifier_minified"
+    case all = "pokemon_v4"
   }
   
   public var viewModel: PokedexViewModel = .init(imageProperties: ImageProperties(sharpness: 0.8,

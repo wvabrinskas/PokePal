@@ -1217,90 +1217,87 @@ public enum Pokemon: Int, CaseIterable {
   case cramorant_gulping = 1207
   case cramorant_gorging = 1208
   case toxtricity_low_key = 1209
-  case eiscue_noice = 1210
-  case indeedee_female = 1211
-  case morpeko_hangry = 1212
-  case zacian_crowned = 1213
-  case zamazenta_crowned = 1214
-  case eternatus_eternamax = 1215
-  case urshifu_rapid_strike = 1216
-  case zarude_dada = 1217
-  case calyrex_ice = 1218
-  case calyrex_shadow = 1219
-  case venusaur_gmax = 1220
-  case charizard_gmax = 1221
-  case blastoise_gmax = 1222
-  case butterfree_gmax = 1223
-  case pikachu_gmax = 1224
-  case meowth_gmax = 1225
-  case machamp_gmax = 1226
-  case gengar_gmax = 1227
-  case kingler_gmax = 1228
-  case lapras_gmax = 1229
-  case eevee_gmax = 1230
-  case snorlax_gmax = 1231
-  case garbodor_gmax = 1232
-  case melmetal_gmax = 1233
-  case rillaboom_gmax = 1234
-  case cinderace_gmax = 1235
-  case inteleon_gmax = 1236
-  case corviknight_gmax = 1237
-  case orbeetle_gmax = 1238
-  case drednaw_gmax = 1239
-  case coalossal_gmax = 1240
-  case flapple_gmax = 1241
-  case appletun_gmax = 1242
-  case sandaconda_gmax = 1243
-  case toxtricity_amped_gmax = 1244
-  case centiskorch_gmax = 1245
-  case hatterene_gmax = 1246
-  case grimmsnarl_gmax = 1247
-  case alcremie_gmax = 1248
-  case copperajah_gmax = 1249
-  case duraludon_gmax = 1250
-  case urshifu_single_strike_gmax = 1251
-  case urshifu_rapid_strike_gmax = 1252
-  case toxtricity_low_key_gmax = 1253
-  case growlithe_hisui = 1254
-  case arcanine_hisui = 1255
-  case voltorb_hisui = 1256
-  case electrode_hisui = 1257
-  case typhlosion_hisui = 1258
-  case qwilfish_hisui = 1259
-  case sneasel_hisui = 1260
-  case samurott_hisui = 1261
-  case lilligant_hisui = 1262
-  case zorua_hisui = 1263
-  case zoroark_hisui = 1264
-  case braviary_hisui = 1265
-  case sliggoo_hisui = 1266
-  case goodra_hisui = 1267
-  case avalugg_hisui = 1268
-  case decidueye_hisui = 1269
-  case dialga_origin = 1270
-  case palkia_origin = 1271
-  case basculin_white_striped = 1272
-  case basculegion_female = 1273
-  case enamorus_therian = 1274
-  case tauros_paldea_combat_breed = 1275
-  case tauros_paldea_blaze_breed = 1276
-  case tauros_paldea_aqua_breed = 1277
-  case wooper_paldea = 1278
-  case oinkologne_female = 1279
-  case dudunsparce_three_segment = 1280
-  case palafin_hero = 1281
-  case maushold_family_of_three = 1282
-  case tatsugiri_droopy = 1283
-  case tatsugiri_stretchy = 1284
-  case squawkabilly_blue_plumage = 1285
-  case squawkabilly_yellow_plumage = 1286
-  case squawkabilly_white_plumage = 1287
-  case gimmighoul_roaming = 1288
-  case ursaluna_bloodmoon = 1297
-  case ogerpon_wellspring_mask = 1298
-  case ogerpon_hearthflame_mask = 1299
-  case ogerpon_cornerstone_mask = 1300
-  case terapagos_terastal = 1301
+  case morpeko_hangry = 1210
+  case zacian_crowned = 1211
+  case zamazenta_crowned = 1212
+  case eternatus_eternamax = 1213
+  case urshifu_rapid_strike = 1214
+  case zarude_dada = 1215
+  case calyrex_ice = 1216
+  case calyrex_shadow = 1217
+  case venusaur_gmax = 1218
+  case charizard_gmax = 1219
+  case blastoise_gmax = 1220
+  case butterfree_gmax = 1221
+  case pikachu_gmax = 1222
+  case meowth_gmax = 1223
+  case machamp_gmax = 1224
+  case gengar_gmax = 1225
+  case kingler_gmax = 1226
+  case lapras_gmax = 1227
+  case eevee_gmax = 1228
+  case snorlax_gmax = 1229
+  case garbodor_gmax = 1230
+  case melmetal_gmax = 1231
+  case rillaboom_gmax = 1232
+  case cinderace_gmax = 1233
+  case inteleon_gmax = 1234
+  case corviknight_gmax = 1235
+  case orbeetle_gmax = 1236
+  case drednaw_gmax = 1237
+  case coalossal_gmax = 1238
+  case flapple_gmax = 1239
+  case appletun_gmax = 1240
+  case sandaconda_gmax = 1241
+  case toxtricity_amped_gmax = 1242
+  case centiskorch_gmax = 1243
+  case hatterene_gmax = 1244
+  case grimmsnarl_gmax = 1245
+  case alcremie_gmax = 1246
+  case copperajah_gmax = 1247
+  case duraludon_gmax = 1248
+  case urshifu_single_strike_gmax = 1249
+  case toxtricity_low_key_gmax = 1250
+  case growlithe_hisui = 1251
+  case arcanine_hisui = 1252
+  case voltorb_hisui = 1253
+  case electrode_hisui = 1254
+  case typhlosion_hisui = 1255
+  case qwilfish_hisui = 1256
+  case sneasel_hisui = 1257
+  case samurott_hisui = 1258
+  case lilligant_hisui = 1259
+  case zorua_hisui = 1260
+  case zoroark_hisui = 1261
+  case braviary_hisui = 1262
+  case sliggoo_hisui = 1263
+  case goodra_hisui = 1264
+  case avalugg_hisui = 1265
+  case decidueye_hisui = 1266
+  case dialga_origin = 1267
+  case palkia_origin = 1268
+  case basculin_white_striped = 1269
+  case basculegion_female = 1270
+  case enamorus_therian = 1271
+  case tauros_paldea_combat_breed = 1272
+  case tauros_paldea_blaze_breed = 1273
+  case tauros_paldea_aqua_breed = 1274
+  case wooper_paldea = 1275
+  case oinkologne_female = 1276
+  case dudunsparce_three_segment = 1277
+  case palafin_hero = 1278
+  case maushold_family_of_three = 1279
+  case tatsugiri_droopy = 1280
+  case tatsugiri_stretchy = 1281
+  case squawkabilly_blue_plumage = 1282
+  case squawkabilly_yellow_plumage = 1283
+  case squawkabilly_white_plumage = 1284
+  case gimmighoul_roaming = 1285
+  case ursaluna_bloodmoon = 1286
+  case ogerpon_wellspring_mask = 1287
+  case ogerpon_hearthflame_mask = 1288
+  case ogerpon_cornerstone_mask = 1289
+  case terapagos_terastal = 1290
 
   case unknown
   
@@ -2542,8 +2539,6 @@ public enum Pokemon: Int, CaseIterable {
     case .cramorant_gulping: return "Cramorant_Gulping"
     case .cramorant_gorging: return "Cramorant_Gorging"
     case .toxtricity_low_key: return "Toxtricity_Low_Key"
-    case .eiscue_noice: return "Eiscue_Noice"
-    case .indeedee_female: return "Indeedee_Female"
     case .morpeko_hangry: return "Morpeko_Hangry"
     case .zacian_crowned: return "Zacian_Crowned"
     case .zamazenta_crowned: return "Zamazenta_Crowned"
@@ -2584,7 +2579,6 @@ public enum Pokemon: Int, CaseIterable {
     case .copperajah_gmax: return "Copperajah_Gmax"
     case .duraludon_gmax: return "Duraludon_Gmax"
     case .urshifu_single_strike_gmax: return "Urshifu_Single_Strike_Gmax"
-    case .urshifu_rapid_strike_gmax: return "Urshifu_Rapid_Strike_Gmax"
     case .toxtricity_low_key_gmax: return "Toxtricity_Low_Key_Gmax"
     case .growlithe_hisui: return "Growlithe_Hisui"
     case .arcanine_hisui: return "Arcanine_Hisui"
