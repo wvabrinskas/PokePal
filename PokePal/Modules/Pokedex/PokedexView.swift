@@ -24,7 +24,7 @@ public final class ImageProperties {
   var contrast: Float
   var zeroCenter: Bool
   
-  init(sharpness: Float,
+  public init(sharpness: Float,
        contrast: Float,
        zeroCenter: Bool = false) {
     self.sharpness = sharpness

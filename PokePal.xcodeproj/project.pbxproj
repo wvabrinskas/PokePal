@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		910710C13003D85F0070931E /* pokemon_v4.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 910710C03003D85F0070931E /* pokemon_v4.smodel */; };
+		910710C830047C5C0070931E /* IdentifyPokemonIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910710C7300478510070931E /* IdentifyPokemonIntent.swift */; };
+		910710C930047C600070931E /* PokemonClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910710C6300478430070931E /* PokemonClassifier.swift */; };
 		910BCFC12B7ADD580057550D /* RootModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910BCFBD2B7ADD580057550D /* RootModule.swift */; };
 		910BCFC22B7ADD580057550D /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910BCFBE2B7ADD580057550D /* RootRouter.swift */; };
 		910BCFC32B7ADD580057550D /* RootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910BCFBF2B7ADD580057550D /* RootBuilder.swift */; };
@@ -58,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		910710C03003D85F0070931E /* pokemon_v4.smodel */ = {isa = PBXFileReference; lastKnownFileType = text; path = pokemon_v4.smodel; sourceTree = "<group>"; };
+		910710C6300478430070931E /* PokemonClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonClassifier.swift; sourceTree = "<group>"; };
+		910710C7300478510070931E /* IdentifyPokemonIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyPokemonIntent.swift; sourceTree = "<group>"; };
 		910BCFBD2B7ADD580057550D /* RootModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModule.swift; sourceTree = "<group>"; };
 		910BCFBE2B7ADD580057550D /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		910BCFBF2B7ADD580057550D /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBuilder.swift; sourceTree = "<group>"; };
@@ -119,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		910710C2300478090070931E /* AppIntents */ = {
+			isa = PBXGroup;
+			children = (
+				910710C6300478430070931E /* PokemonClassifier.swift */,
+				910710C7300478510070931E /* IdentifyPokemonIntent.swift */,
+			);
+			path = AppIntents;
+			sourceTree = "<group>";
+		};
 		910BCFB92B7ADC510057550D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +236,7 @@
 		91ABCB372B78203D00FA7C0C /* PokePal */ = {
 			isa = PBXGroup;
 			children = (
+				910710C2300478090070931E /* AppIntents */,
 				9182BEBA2C0A522100C4C787 /* SharedViews */,
 				91289C342B7BDF3A00BBB16F /* Info.plist */,
 				910BCFCA2B7AF7CA0057550D /* Theme.swift */,
@@ -381,7 +395,9 @@
 				910BCFD12B7AFA490057550D /* PokedexModule.swift in Sources */,
 				91C30A282B7D73500071D7F8 /* CameraRouter.swift in Sources */,
 				912BDDAF2B7B0BDB00F873EE /* ViewFinderView.swift in Sources */,
+				910710C830047C5C0070931E /* IdentifyPokemonIntent.swift in Sources */,
 				91C30A272B7D73500071D7F8 /* CameraView.swift in Sources */,
+				910710C930047C600070931E /* PokemonClassifier.swift in Sources */,
 				912BDDAA2B7B051800F873EE /* UIImage+Tensor.swift in Sources */,
 				9182BEB92C0A510700C4C787 /* Font.swift in Sources */,
 				914B952F2C0A63AA00353CED /* SeparatorView.swift in Sources */,
@@ -552,6 +568,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -585,6 +602,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
