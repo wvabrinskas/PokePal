@@ -21,7 +21,7 @@ struct ButtonView: View {
     Button {
       action()
     } label: {
-      RoundedRectangle(cornerRadius: 10, style: .continuous)
+      RoundedRectangle(cornerRadius: 16, style: .continuous)
         .fill(.white)
         .fill(Gradient(colors: [viewModel.color, viewModel.color.opacity(0.8)]))
         .stroke(Gradient(colors: [.white.opacity(0.3), viewModel.color]), lineWidth: 2)
@@ -31,9 +31,7 @@ struct ButtonView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: viewModel.size.width * 0.6, height: viewModel.size.height * 0.6)
-            .foregroundStyle(viewModel.color)
-            .layerEffect(ShaderLibrary.embossOut(.float(0.8)), maxSampleOffset: .zero)
-            .layerEffect(ShaderLibrary.emboss(.float(0.5)), maxSampleOffset: .zero)
+            .foregroundStyle(viewModel.color.mix(with: .black, by: 0.2))
         }
     }
     .shadow(color: .white.opacity(0.1), radius: 3, x: 5, y: -5)

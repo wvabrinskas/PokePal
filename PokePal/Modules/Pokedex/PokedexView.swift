@@ -192,8 +192,8 @@ public struct PokedexView: View {
         viewModel.showResultsMenu = false
         viewModel.showWebResult = .init(pokemon: pokemon.pokemon)
       }
+      .presentationBackground(.clear)
       .presentationDetents([.height(260)])
-      .presentationCornerRadius(0)
     }
     .sheet(isPresented: $viewModel.showDebugMenu) {
       DebugView(viewModel: .init(inferenceImage: viewModel.inferenceImage),
