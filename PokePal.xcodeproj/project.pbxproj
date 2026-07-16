@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		910710C13003D85F0070931E /* pokemon_v4.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 910710C03003D85F0070931E /* pokemon_v4.smodel */; };
 		910710C830047C5C0070931E /* IdentifyPokemonIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910710C7300478510070931E /* IdentifyPokemonIntent.swift */; };
 		910710C930047C600070931E /* PokemonClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910710C6300478430070931E /* PokemonClassifier.swift */; };
 		910BCFC12B7ADD580057550D /* RootModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910BCFBD2B7ADD580057550D /* RootModule.swift */; };
@@ -31,6 +30,7 @@
 		913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */; };
 		91479DEC2F3CD55E00B7F109 /* Neuron in Frameworks */ = {isa = PBXBuildFile; productRef = 91479DEB2F3CD55E00B7F109 /* Neuron */; };
 		914B952F2C0A63AA00353CED /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B952E2C0A63AA00353CED /* SeparatorView.swift */; };
+		9154A268300944E100EFC0E6 /* pokemon_v4.smodel in Resources */ = {isa = PBXBuildFile; fileRef = 9154A267300944E100EFC0E6 /* pokemon_v4.smodel */; };
 		9156791E2F43BF9700178D7B /* Neuron in Frameworks */ = {isa = PBXBuildFile; productRef = 9156791D2F43BF9700178D7B /* Neuron */; };
 		915679202F43C49C00178D7B /* 39_24_jigglypuff.png in Resources */ = {isa = PBXBuildFile; fileRef = 9156791F2F43C49C00178D7B /* 39_24_jigglypuff.png */; };
 		915679222F43EC8400178D7B /* HuddleArch in Frameworks */ = {isa = PBXBuildFile; productRef = 915679212F43EC8400178D7B /* HuddleArch */; };
@@ -59,7 +59,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		910710C03003D85F0070931E /* pokemon_v4.smodel */ = {isa = PBXFileReference; lastKnownFileType = text; path = pokemon_v4.smodel; sourceTree = "<group>"; };
 		910710C6300478430070931E /* PokemonClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonClassifier.swift; sourceTree = "<group>"; };
 		910710C7300478510070931E /* IdentifyPokemonIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyPokemonIntent.swift; sourceTree = "<group>"; };
 		910BCFBD2B7ADD580057550D /* RootModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModule.swift; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		913FFD172B7DB56E0028D4D7 /* WebResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebResultView.swift; sourceTree = "<group>"; };
 		913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "151-pokemon-classifier.smodel"; sourceTree = "<group>"; };
 		914B952E2C0A63AA00353CED /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
+		9154A267300944E100EFC0E6 /* pokemon_v4.smodel */ = {isa = PBXFileReference; lastKnownFileType = text; path = pokemon_v4.smodel; sourceTree = "<group>"; };
 		9156791F2F43C49C00178D7B /* 39_24_jigglypuff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 39_24_jigglypuff.png; sourceTree = "<group>"; };
 		9176A1BB2C064905007B1569 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
 		9176A1BF2C066E5C007B1569 /* DimpleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimpleView.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 				9156791F2F43C49C00178D7B /* 39_24_jigglypuff.png */,
 				9182BEB72C0A508400C4C787 /* PressStart2P-Regular.ttf */,
 				912C5CDE2B9119D50085431C /* gen1-3-pokemon-classifier.smodel */,
-				910710C03003D85F0070931E /* pokemon_v4.smodel */,
+				9154A267300944E100EFC0E6 /* pokemon_v4.smodel */,
 				913FFD1F2B7F19580028D4D7 /* 151-pokemon-classifier.smodel */,
 			);
 			path = Resources;
@@ -373,9 +373,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				91ABCB402B78203F00FA7C0C /* Preview Assets.xcassets in Resources */,
+				9154A268300944E100EFC0E6 /* pokemon_v4.smodel in Resources */,
 				913FFD202B7F19580028D4D7 /* 151-pokemon-classifier.smodel in Resources */,
 				9182BEBD2C0A52B800C4C787 /* PressStart2P-Regular.ttf in Resources */,
-				910710C13003D85F0070931E /* pokemon_v4.smodel in Resources */,
 				912C5CDF2B9119D50085431C /* gen1-3-pokemon-classifier.smodel in Resources */,
 				915679202F43C49C00178D7B /* 39_24_jigglypuff.png in Resources */,
 				91ABCB3D2B78203F00FA7C0C /* Assets.xcassets in Resources */,
